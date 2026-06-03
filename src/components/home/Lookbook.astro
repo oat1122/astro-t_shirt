@@ -1,0 +1,65 @@
+---
+import { Button } from '@/components/starwind/button';
+
+interface Badge {
+  label: string;
+  detail: string;
+  top: string;
+  left: string;
+}
+
+const badges: Badge[] = [
+  { label: 'High-Density Print', detail: 'Vibrant & Durable', top: '35%', left: '20%' },
+  { label: 'Premium Cotton', detail: '100% Breathable', top: '70%', left: '65%' },
+];
+---
+
+<div class="mt-24 lg:mt-32 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+  {/* Left - Interactive Image */}
+  <div class="relative w-full aspect-[4/5] sm:aspect-square lg:aspect-[4/5] rounded-[3rem] overflow-hidden group">
+    <img
+      src="https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?auto=format&fit=crop&q=80&w=1024"
+      alt="Premium T-Shirt Manufacturing"
+      width="1024"
+      height="1536"
+      loading="lazy"
+      decoding="async"
+      class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+    />
+    
+    {/* Floating Badges mapping (Clean Code pattern: Data-driven list) */}
+    {badges.map((badge) => (
+      <div 
+        class="absolute bg-white/90 backdrop-blur-md px-4 py-2 rounded-full shadow-lg border border-gray-100 flex items-center gap-2 transform -translate-x-1/2 -translate-y-1/2 cursor-pointer transition-transform hover:scale-110 hover:bg-white"
+        style={`top: ${badge.top}; left: ${badge.left};`}
+      >
+        <div class="w-2 h-2 rounded-full bg-black animate-pulse" />
+        <span class="text-sm font-medium text-gray-900">{badge.label}</span>
+        <span class="text-sm font-bold text-gray-500">{badge.detail}</span>
+      </div>
+    ))}
+  </div>
+
+  {/* Right - Typography & CTA */}
+  <div class="flex flex-col z-10 lg:pl-10">
+    <div class="flex items-center gap-3 mb-6">
+      <span class="w-12 h-[1px] bg-gray-900"></span>
+      <span class="text-sm font-semibold tracking-widest uppercase text-gray-900">Premium Detail</span>
+    </div>
+
+    <h2 class="text-[4rem] sm:text-[5rem] lg:text-[6rem] leading-[0.9] font-bold tracking-tight text-gray-900 mb-6 flex flex-col">
+      <span>Quality</span>
+      <span class="text-gray-400 font-light tracking-normal">Showcase</span>
+    </h2>
+
+    <p class="text-gray-600 max-w-md leading-relaxed mb-8 text-base md:text-lg">
+      เจาะลึกทุกรายละเอียดของงานผลิต เราใช้วัสดุเกรดพรีเมียมและเทคนิคที่ทันสมัยเพื่อให้ได้ผลงานที่ดีที่สุด
+    </p>
+
+    <div class="flex items-center gap-4">
+      <Button class="rounded-full bg-black hover:bg-gray-800 text-white px-8 py-6 text-base shadow-lg transition-transform hover:scale-105">
+        View Portfolio
+      </Button>
+    </div>
+  </div>
+</div>

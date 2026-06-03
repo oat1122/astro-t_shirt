@@ -1,0 +1,48 @@
+---
+import Icon from '@/components/Icon.astro';
+---
+{/* Privileges Section */}
+<section class="mt-32 relative z-20">
+  <div class="mb-12 text-center">
+    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight">สิทธิพิเศษและโปรโมชั่นสั่งทำเสื้อ</h2>
+    <p class="text-gray-500 mt-4 text-base max-w-2xl mx-auto">คุ้มค่ากว่าเมื่อสั่งผลิตกับเรา พร้อมบริการเสริมฟรีเพื่อแบรนด์ของคุณ</p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    {/* Box 1 */}
+    <div class="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+      <div class="w-14 h-14 bg-gray-50 rounded-2xl flex items-center justify-center mb-6">
+        <Icon name="palette" size={28} class="text-gray-900" />
+      </div>
+      <h3 class="text-xl font-bold text-gray-900 mb-3">ออกแบบฟรี</h3>
+      <p class="text-gray-500 text-sm leading-relaxed">ทีมกราฟิกมืออาชีพพร้อมให้คำปรึกษาและออกแบบลายเสื้อให้คุณฟรี ไม่มีค่าใช้จ่ายแฝง</p>
+    </div>
+
+    {/* Box 2 */}
+    <div class="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+      <div class="w-14 h-14 bg-gray-50 rounded-2xl flex items-center justify-center mb-6">
+        <Icon name="truck-delivery" size={28} class="text-gray-900" />
+      </div>
+      <h3 class="text-xl font-bold text-gray-900 mb-3">ส่งฟรีทั่วกรุงเทพฯ</h3>
+      <p class="text-gray-500 text-sm leading-relaxed">บริการจัดส่งฟรีในเขตกรุงเทพฯ และปริมณฑล สินค้าถึงมือตรงเวลาและปลอดภัย</p>
+    </div>
+
+    {/* Box 3 */}
+    <div class="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+      <div class="w-14 h-14 bg-gray-50 rounded-2xl flex items-center justify-center mb-6">
+        <Icon name="shirt" size={28} class="text-gray-900" />
+      </div>
+      <h3 class="text-xl font-bold text-gray-900 mb-3">ขึ้นตัวอย่างฟรี</h3>
+      <p class="text-gray-500 text-sm leading-relaxed">มั่นใจในคุณภาพก่อนผลิตจริง ด้วยบริการขึ้นตัวอย่างสินค้าฟรีเมื่อสั่งจำนวนถึงเกณฑ์</p>
+    </div>
+
+    {/* Box 4 */}
+    <div class="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+      <div class="w-14 h-14 bg-gray-50 rounded-2xl flex items-center justify-center mb-6">
+        <Icon name="clock-hour-4" size={28} class="text-gray-900" />
+      </div>
+      <h3 class="text-xl font-bold text-gray-900 mb-3">ประเมินราคาไว</h3>
+      <p class="text-gray-500 text-sm leading-relaxed">ตอบกลับรวดเร็ว เสนอราคาชัดเจน โปร่งใส ช่วยให้คุณวางแผนงบประมาณได้ง่ายขึ้น</p>
+    </div>
+  </div>
+</section>
