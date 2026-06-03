@@ -1,46 +1,28 @@
 ---
 import Layout from '@/layouts/Layout.astro';
-import { getCollection } from 'astro:content';
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardFooter,
-} from '@/components/starwind/card';
-import { Button } from '@/components/starwind/button';
-
-const posts = (await getCollection('blog'))
-  .filter((p) => !p.data.draft)
-  .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf());
+import Navbar from '@/components/Navbar.astro';
+import BlogHero from '@/components/blog/BlogHero.astro';
+import BlogCategoriesBanner from '@/components/blog/BlogCategoriesBanner.astro';
+import BlogFeatured from '@/components/blog/BlogFeatured.astro';
+import BlogGrid from '@/components/blog/BlogGrid.astro';
 ---
 
-<Layout title="บทความ" description="ข่าวสารและบทความจาก Astro T-Shirt">
-  <main class="mx-auto max-w-3xl px-4 py-16">
-    <h1 class="mb-8 text-3xl font-bold">บทความ</h1>
-    <div class="space-y-6">
-      {
-        posts.map((post) => (
-          <Card>
-            <CardHeader>
-              <CardTitle>{post.data.title}</CardTitle>
-              <CardDescription>
-                {post.data.publishedAt.toLocaleDateString('th-TH', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric',
-                })}{' '}
-                · {post.data.author}
-              </CardDescription>
-            </CardHeader>
-            <CardFooter>
-              <Button href={`/blog/${post.id}`} variant="ghost">
-                อ่านต่อ →
-              </Button>
-            </CardFooter>
-          </Card>
-        ))
-      }
+<Layout 
+  title="บทความและความรู้เรื่องเสื้อผ้า | ธน พลัส 153"
+  description="รวมบทความน่ารู้ เทรนด์แฟชั่น เทคนิคงานสกรีน และเคล็ดลับการทำแบรนด์เสื้อผ้า จากโรงงานผลิตเสื้อผ้าครบวงจร ธน พลัส 153"
+>
+  <div class="min-h-screen bg-white p-2 sm:p-4 md:p-6 font-sans">
+    <div class="max-w-[1400px] mx-auto bg-[#FAFAFA] rounded-[2rem] sm:rounded-[3rem] overflow-hidden relative shadow-sm border border-gray-100">
+
+      <Navbar />
+
+      <main class="px-4 sm:px-8 lg:px-12 pt-8 pb-12">
+        <BlogHero />
+        <BlogCategoriesBanner />
+        <BlogFeatured />
+        <BlogGrid />
+      </main>
+
     </div>
-  </main>
+  </div>
 </Layout>
