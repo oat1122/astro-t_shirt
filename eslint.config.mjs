@@ -1,11 +1,19 @@
 import js from "@eslint/js";
 import tseslint from "typescript-eslint";
 import eslintPluginAstro from "eslint-plugin-astro";
+import globals from "globals";
 
 export default [
   js.configs.recommended,
   ...tseslint.configs.recommended,
   ...eslintPluginAstro.configs.recommended,
+  {
+    // ไฟล์ฝั่ง Node (config + เซิร์ฟเวอร์ deploy) — ให้รู้จัก process/__dirname/require
+    files: ["*.{js,mjs,cjs}", "astro.config.mjs", "server.js"],
+    languageOptions: {
+      globals: globals.node,
+    },
+  },
   {
     rules: {
       // ปรับเองตรงนี้ เช่น

@@ -31,7 +31,8 @@ const products = defineCollection({
 
 // คอลเลกชันบทความ/บล็อก — สำหรับ SEO/คอนเทนต์
 const blog = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/blog' }),
+  // ไม่นับ CLAUDE.md (คู่มือเขียนบทความ) เป็นบทความบล็อก
+  loader: glob({ pattern: ['**/*.{md,mdx}', '!**/CLAUDE.md'], base: './src/content/blog' }),
   schema: ({ image }) =>
     z.object({
       title: z.string(),
@@ -39,6 +40,7 @@ const blog = defineCollection({
       cover: image().optional(),
       coverAlt: z.string().optional(),
       author: z.string().default('ทีมงาน'),
+      category: z.string().default('Uncategorized'),
       tags: z.array(z.string()).default([]),
       draft: z.boolean().default(false),
       publishedAt: z.coerce.date(),

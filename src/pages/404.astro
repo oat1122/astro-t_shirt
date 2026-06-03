@@ -1,0 +1,53 @@
+---
+// หน้า 404 — ไม่พบหน้าที่ต้องการ จะนับถอยหลังแล้วพากลับหน้าแรกอัตโนมัติ
+import Layout from '@/layouts/Layout.astro';
+import Navbar from '@/components/Navbar.astro';
+import { Button } from '@/components/starwind/button';
+
+// วินาทีก่อนพากลับหน้าแรก
+const REDIRECT_SECONDS = 5;
+---
+
+<Layout
+  title="ไม่พบหน้าที่ค้นหา (404)"
+  description="ขออภัย ไม่พบหน้าที่คุณกำลังมองหา กำลังพากลับสู่หน้าแรก"
+  noindex={true}
+>
+  <div class="min-h-screen bg-white p-2 sm:p-4 md:p-6 font-sans">
+    <div
+      class="max-w-[1400px] mx-auto bg-[#FAFAFA] rounded-[2rem] sm:rounded-[3rem] overflow-hidden relative shadow-sm border border-gray-100"
+    >
+      <Navbar />
+
+      <main class="px-8 lg:px-12 py-24 flex flex-col items-center justify-center text-center">
+        <p class="text-[6rem] sm:text-[9rem] font-bold leading-none text-primary">404</p>
+        <h1 class="mt-4 text-2xl sm:text-3xl font-semibold text-foreground">
+          ไม่พบหน้าที่คุณค้นหา
+        </h1>
+        <p class="mt-3 max-w-md text-muted-foreground">
+          ขออภัย หน้าที่คุณกำลังมองหาอาจถูกย้ายหรือไม่มีอยู่แล้ว
+          ระบบจะพาคุณกลับสู่หน้าแรกใน
+          <span id="countdown" class="font-semibold text-foreground">{REDIRECT_SECONDS}</span> วินาที
+        </p>
+
+        <div class="mt-8">
+          <Button href="/">กลับสู่หน้าแรกเลย</Button>
+        </div>
+      </main>
+    </div>
+  </div>
+</Layout>
+
+<script is:inline define:vars={{ REDIRECT_SECONDS }}>
+  let remaining = REDIRECT_SECONDS;
+  const el = document.getElementById('countdown');
+
+  const tick = setInterval(() => {
+    remaining -= 1;
+    if (el) el.textContent = String(remaining);
+    if (remaining <= 0) {
+      clearInterval(tick);
+      window.location.href = '/';
+    }
+  }, 1000);
+</script>

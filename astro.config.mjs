@@ -1,14 +1,21 @@
 // @ts-check
 import { defineConfig } from "astro/config";
+import { loadEnv } from "vite";
 
 import react from "@astrojs/react";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
+import { EnumChangefreq } from "sitemap";
 import robotsTxt from "astro-robots-txt";
 import tailwindcss from "@tailwindcss/vite";
 
-// TODO: เปลี่ยนเป็นโดเมนจริงของเว็บ (มีผลต่อ sitemap / robots / rss / canonical URL)
-const SITE_URL = "https://xn--o3c1bj3b4bj8cd.com/";
+// โดเมนจริงของเว็บ — อ่านจาก .env (ดู .env.example), fallback เป็นค่า default
+// มีผลต่อ sitemap / robots / rss / canonical URL
+const { SITE_URL = "https://xn--o3c1bj3b4bj8cd.com/" } = loadEnv(
+  process.env.NODE_ENV ?? "",
+  process.cwd(),
+  "",
+);
 
 // https://astro.build/config
 export default defineConfig({
@@ -31,7 +38,7 @@ export default defineConfig({
       serialize(item) {
         if (item.url === `${SITE_URL}/`) {
           item.priority = 1.0;
-          item.changefreq = "daily";
+          item.changefreq = EnumChangefreq.DAILY;
         } else if (
           item.url.endsWith("/products/") ||
           item.url.endsWith("/blog/")
