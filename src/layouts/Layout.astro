@@ -1,0 +1,48 @@
+---
+// Base layout — ใช้เป็นโครงหลักของทุกหน้า
+import '@/styles/global.css';
+import SEO from '@/components/SEO.astro';
+import { SITE } from '@/consts';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  type?: string;
+  noindex?: boolean;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const { title, description, image, type, noindex, jsonLd } = Astro.props;
+---
+
+<!doctype html>
+<html lang={SITE.lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+
+    {/* RSS feed discovery */}
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={SITE.name}
+      href={new URL('rss.xml', Astro.site)}
+    />
+
+    <SEO
+      title={title}
+      description={description}
+      image={image}
+      type={type}
+      noindex={noindex}
+      jsonLd={jsonLd}
+    />
+  </head>
+  <body class="min-h-screen bg-background text-foreground antialiased">
+    <slot />
+  </body>
+</html>

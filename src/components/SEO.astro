@@ -1,0 +1,88 @@
+---
+// SEO component กลาง — รวม meta tags (astro-seo) + JSON-LD structured data
+// ใช้ astro:assets-friendly + canonical URL จาก Astro.site
+import { SEO as AstroSEO } from 'astro-seo';
+import { SITE } from '@/consts';
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** path ของรูป OG (เริ่มที่ /) หรือ absolute URL */
+  image?: string;
+  /** 'website' | 'article' | 'product' ฯลฯ */
+  type?: string;
+  /** ไม่ให้ index หน้านี้ */
+  noindex?: boolean;
+  /** JSON-LD object เพิ่มเติม (เช่น Product, Article) — ถ้าไม่ส่ง จะใช้ WebSite/Organization เริ่มต้น */
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const {
+  title,
+  description = SITE.description,
+  image = SITE.defaultOgImage,
+  type = 'website',
+  noindex = false,
+  jsonLd,
+} = Astro.props;
+
+const pageTitle = title ? `${title} | ${SITE.name}` : SITE.title;
+
+// canonical = URL ปัจจุบันเทียบกับ Astro.site
+const canonical = new URL(Astro.url.pathname, Astro.site).toString();
+// แปลง image เป็น absolute URL
+const ogImage = new URL(image, Astro.site).toString();
+
+// JSON-LD เริ่มต้น: Organization + WebSite (ดีต่อ GEO/LLM crawler)
+const defaultJsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: SITE.name,
+    url: Astro.site?.toString(),
+    logo: new URL('/favicon.svg', Astro.site).toString(),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: SITE.name,
+    url: Astro.site?.toString(),
+  },
+];
+
+const structuredData = jsonLd ?? defaultJsonLd;
+const ldArray = Array.isArray(structuredData) ? structuredData : [structuredData];
+---
+
+<AstroSEO
+  title={pageTitle}
+  description={description}
+  canonical={canonical}
+  noindex={noindex}
+  nofollow={noindex}
+  openGraph={{
+    basic: {
+      title: pageTitle,
+      type,
+      image: ogImage,
+      url: canonical,
+    },
+    optional: {
+      siteName: SITE.name,
+      description,
+      locale: SITE.locale,
+    },
+  }}
+  twitter={{
+    card: 'summary_large_image',
+    site: SITE.social.twitter,
+    title: pageTitle,
+    description,
+    image: ogImage,
+  }}
+/>
+
+{/* JSON-LD structured data */}
+{ldArray.map((data) => (
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(data)} />
+))}

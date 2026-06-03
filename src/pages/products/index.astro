@@ -1,0 +1,53 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+  CardFooter,
+} from '@/components/starwind/card';
+import { Button } from '@/components/starwind/button';
+import { Badge } from '@/components/starwind/badge';
+
+const products = (await getCollection('products')).sort(
+  (a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf(),
+);
+---
+
+<Layout title="สินค้าทั้งหมด" description="เลือกชมเสื้อยืดดีไซน์พิเศษทั้งหมดของเรา">
+  <main class="mx-auto max-w-5xl px-4 py-16">
+    <h1 class="mb-8 text-3xl font-bold">สินค้าทั้งหมด</h1>
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        products.map((product) => (
+          <Card class="overflow-hidden">
+            <Image
+              src={product.data.image}
+              alt={product.data.imageAlt}
+              width={600}
+              height={600}
+              class="aspect-square w-full object-cover"
+            />
+            <CardHeader>
+              <CardTitle>{product.data.title}</CardTitle>
+            </CardHeader>
+            <CardContent class="flex items-center gap-2">
+              <span class="text-primary text-xl font-bold">
+                ฿{product.data.price.toLocaleString('th-TH')}
+              </span>
+              {!product.data.inStock && <Badge variant="error">สินค้าหมด</Badge>}
+            </CardContent>
+            <CardFooter>
+              <Button href={`/products/${product.id}`} class="w-full">
+                ดูรายละเอียด
+              </Button>
+            </CardFooter>
+          </Card>
+        ))
+      }
+    </div>
+  </main>
+</Layout>
