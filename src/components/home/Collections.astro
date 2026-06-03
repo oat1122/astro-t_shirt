@@ -5,10 +5,29 @@ import tshirtsImg from '@/assets/home/T-Shirts_Collection.png';
 import poloImg from '@/assets/home/Polo-Shirts_Collection.png';
 import sportswearImg from '@/assets/home/Sportswear_Collection.png';
 
+// คำอธิบายไม่ซ้ำกันต่อหมวด + มีคีย์เวิร์ด → ดีต่อ SEO และ AI Overviews
 const collections = [
-  { title: "T-Shirts", image: tshirtsImg, alt: "ตัวอย่างงานรับผลิตเสื้อยืดสกรีนลายจากโรงงาน" },
-  { title: "Polo Shirts", image: poloImg, alt: "ตัวอย่างงานรับผลิตเสื้อโปโลปักโลโก้แบรนด์" },
-  { title: "Sportswear", image: sportswearImg, alt: "ตัวอย่างงานรับผลิตชุดกีฬาผ้าระบายอากาศ" },
+  {
+    title: "เสื้อยืด",
+    image: tshirtsImg,
+    alt: "ตัวอย่างงานรับผลิตเสื้อยืดสกรีนลายจากโรงงาน",
+    description: "รับผลิตเสื้อยืด\nสกรีนลายคุณภาพสูง",
+    href: "/products",
+  },
+  {
+    title: "เสื้อโปโล",
+    image: poloImg,
+    alt: "ตัวอย่างงานรับผลิตเสื้อโปโลปักโลโก้แบรนด์",
+    description: "รับปักโลโก้เสื้อโปโล\nสำหรับองค์กรและทีม",
+    href: "/products",
+  },
+  {
+    title: "ชุดกีฬา",
+    image: sportswearImg,
+    alt: "ตัวอย่างงานรับผลิตชุดกีฬาผ้าระบายอากาศ",
+    description: "ผลิตชุดกีฬา\nผ้าระบายอากาศใส่สบาย",
+    href: "/products",
+  },
 ];
 
 // การ์ดสุดท้ายวางคู่กับปุ่ม next จึงดึงออกมาแยก
@@ -17,8 +36,14 @@ const last = collections[collections.length - 1];
 ---
 
 {/* Collections Section */}
-<section class="mt-32 lg:mt-24 relative z-20">
- 
+<section class="mt-32 lg:mt-24 relative z-20" aria-labelledby="collections-heading">
+  {/* หัวข้อระดับ h2 → ลำดับชั้นหัวข้อชัดเจน ช่วยทั้ง SEO และผู้ใช้ screen reader */}
+  <h2 id="collections-heading" class="text-2xl md:text-3xl font-bold mb-6">
+    หมวดสินค้าแนะนำ
+    <span class="block text-sm md:text-base font-normal text-gray-500 mt-1">
+      รับผลิตเสื้อยืด เสื้อโปโล และชุดกีฬา สกรีนและปักครบวงจร
+    </span>
+  </h2>
 
   <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 

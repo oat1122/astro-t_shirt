@@ -1,53 +1,112 @@
 ---
+import { Image } from 'astro:assets';
 import { Button } from '@/components/starwind/button';
+import silkScreen from '@/assets/home/ScreenServices/Silk Screen.png';
+import dftDtg from '@/assets/home/ScreenServices/DFT_DTG.png';
+import sublimation from '@/assets/home/ScreenServices/Sublimation.png';
 ---
 
-{/* Screen Printing & Embroidery Section */}
-<section class="mt-32 relative z-20">
-  <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-    
-    <div class="order-2 lg:order-1 rounded-[2rem] overflow-hidden">
-      <img 
-        src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?auto=format&fit=crop&q=80&w=800" 
-        alt="Screen Printing Services" 
-        class="w-full h-auto object-cover aspect-[4/3] transform hover:scale-105 transition-transform duration-700"
-      />
+<section class="mt-32 relative z-20 container mx-auto px-4 md:px-8">
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+
+    {/* Images Section */}
+    <div class="order-2 lg:order-1 lg:col-span-7 grid grid-cols-12 gap-4 relative">
+      {/* Decorative background shape */}
+      <div class="absolute -inset-4 bg-gradient-to-tr from-gray-100 to-gray-50 rounded-[3rem] -z-10 transform scale-100 hidden md:block"></div>
+
+      <div class="col-span-12 rounded-[2.5rem] overflow-hidden relative group shadow-xl">
+        <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500 z-10"></div>
+        <Image
+          src={silkScreen}
+          alt="งานซิลค์สกรีน (Silk Screen)"
+          class="w-full h-auto object-cover aspect-[4/3] transform group-hover:scale-105 transition-transform duration-700"
+        />
+        <div class="absolute bottom-6 left-6 z-20 bg-white/95 backdrop-blur-md px-5 py-2.5 rounded-2xl shadow-lg border border-white/20">
+          <span class="text-gray-900 font-semibold text-sm tracking-wide">Silk Screen Printing</span>
+        </div>
+      </div>
+
+      <div class="col-span-6 rounded-[2rem] overflow-hidden relative group shadow-lg mt-2">
+        <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500 z-10"></div>
+        <Image
+          src={dftDtg}
+          alt="งานพิมพ์ DFT / DTG"
+          class="w-full h-auto object-cover aspect-[4/3] transform group-hover:scale-105 transition-transform duration-700"
+        />
+        <div class="absolute bottom-4 left-4 z-20 bg-white/95 backdrop-blur-md px-4 py-2 rounded-xl shadow-lg border border-white/20">
+          <span class="text-gray-900 font-medium text-xs tracking-wide">DFT / DTG</span>
+        </div>
+      </div>
+
+      <div class="self-start col-span-6 rounded-[2rem] overflow-hidden relative group shadow-lg mt-2 lg:-mt-12">
+        <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500 z-10"></div>
+        <Image
+          src={sublimation}
+          alt="งานพิมพ์ Sublimation เสื้อกีฬา"
+          class="w-full h-auto object-cover aspect-[4/3] transform group-hover:scale-105 transition-transform duration-700"
+        />
+        <div class="absolute bottom-4 left-4 z-20 bg-white/95 backdrop-blur-md px-4 py-2 rounded-xl shadow-lg border border-white/20">
+          <span class="text-gray-900 font-medium text-xs tracking-wide">Sublimation</span>
+        </div>
+      </div>
     </div>
 
-    <div class="order-1 lg:order-2 flex flex-col items-start text-left">
-      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight mb-6">บริการรับสกรีนเสื้อและงานพิมพ์ผ้า</h2>
-      <p class="text-gray-600 text-lg mb-8 leading-relaxed">
-        ตอบโจทย์ทุกงานดีไซน์ด้วยเทคนิคการสกรีนและงานปักที่หลากหลาย ควบคุมคุณภาพทุกขั้นตอนเพื่อให้ได้สีสันที่คมชัดและทนทาน ไม่ว่าจะเป็นงานซิลค์สกรีน, DFT, Sublimation หรืองานปักคอมพิวเตอร์
+    {/* Text Content Section */}
+    <div class="order-1 lg:order-2 lg:col-span-5 flex flex-col items-start text-left">
+      
+      
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 tracking-tight mb-4 lg:mb-5 leading-[1.2]">
+        บริการรับสกรีนเสื้อ <br/>
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-gray-900 to-gray-500">
+          และงานพิมพ์ผ้า
+        </span>
+      </h2>
+      
+      <p class="text-gray-600 text-base md:text-lg mb-6 leading-relaxed">
+        ตอบโจทย์ทุกงานดีไซน์ด้วยเทคนิคการสกรีนและงานปักที่หลากหลาย ควบคุมคุณภาพทุกขั้นตอนเพื่อให้ได้สีสันที่คมชัด ทนทาน รองรับทุกความต้องการ
       </p>
       
-      <ul class="flex flex-col gap-4 mb-10 w-full">
-        <li class="flex items-start gap-3">
-          <div class="mt-1 bg-black text-white rounded-full p-1"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
-          <div>
-            <strong class="text-gray-900 font-semibold block">ซิลค์สกรีน (Silk Screen)</strong>
-            <span class="text-gray-500 text-sm">สีสด ทนทาน เหมาะสำหรับการผลิตจำนวนมาก</span>
+      <div class="flex flex-col gap-2 w-full mb-8">
+        {/* Service Card 1 */}
+        <div class="group flex items-start gap-3.5 p-3 rounded-2xl hover:bg-gray-50 border border-transparent hover:border-gray-100 transition-all duration-300">
+          <div class="flex-shrink-0 mt-0.5 bg-white shadow-sm border border-gray-100 text-gray-900 rounded-xl p-2.5 group-hover:scale-110 transition-transform duration-300">
+             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22h6a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v3"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M5 17a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/><path d="M7 16.5 8 22l-3-1-3 1 1-5.5"/></svg>
           </div>
-        </li>
-        <li class="flex items-start gap-3">
-          <div class="mt-1 bg-black text-white rounded-full p-1"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
           <div>
-            <strong class="text-gray-900 font-semibold block">งานพิมพ์ DFT / DTG</strong>
-            <span class="text-gray-500 text-sm">พิมพ์ลายได้ไม่จำกัดสี เก็บรายละเอียดได้คมชัด</span>
+            <strong class="text-gray-900 font-bold text-base block mb-0.5">ซิลค์สกรีน (Silk Screen)</strong>
+            <span class="text-gray-500 text-sm md:text-base leading-relaxed block">สีสด ทนทาน เหมาะสำหรับการผลิตจำนวนมาก ต้นทุนต่ำเมื่อสั่งจำนวนเยอะ</span>
           </div>
-        </li>
-        <li class="flex items-start gap-3">
-          <div class="mt-1 bg-black text-white rounded-full p-1"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+        </div>
+        
+        {/* Service Card 2 */}
+        <div class="group flex items-start gap-3.5 p-3 rounded-2xl hover:bg-gray-50 border border-transparent hover:border-gray-100 transition-all duration-300">
+          <div class="flex-shrink-0 mt-0.5 bg-white shadow-sm border border-gray-100 text-gray-900 rounded-xl p-2.5 group-hover:scale-110 transition-transform duration-300">
+             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+          </div>
           <div>
-            <strong class="text-gray-900 font-semibold block">งานปักคอมพิวเตอร์</strong>
-            <span class="text-gray-500 text-sm">ดูพรีเมียม หรูหรา เหมาะสำหรับเสื้อโปโลและยูนิฟอร์ม</span>
+            <strong class="text-gray-900 font-bold text-base block mb-0.5">งานพิมพ์ DFT / DTG</strong>
+            <span class="text-gray-500 text-sm md:text-base leading-relaxed block">พิมพ์ลายได้ไม่จำกัดสี เก็บรายละเอียดได้คมชัด ไม่ต้องเสียค่าทำบล็อกสกรีน</span>
           </div>
-        </li>
-      </ul>
+        </div>
+        
+        {/* Service Card 3 */}
+        <div class="group flex items-start gap-3.5 p-3 rounded-2xl hover:bg-gray-50 border border-transparent hover:border-gray-100 transition-all duration-300">
+          <div class="flex-shrink-0 mt-0.5 bg-white shadow-sm border border-gray-100 text-gray-900 rounded-xl p-2.5 group-hover:scale-110 transition-transform duration-300">
+             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          </div>
+          <div>
+            <strong class="text-gray-900 font-bold text-base block mb-0.5">Sublimation</strong>
+            <span class="text-gray-500 text-sm md:text-base leading-relaxed block">สีซึมเข้าเนื้อผ้า ระบายอากาศได้ดีเยี่ยม เหมาะสำหรับเสื้อกีฬาและยูนิฟอร์ม</span>
+          </div>
+        </div>
+      </div>
 
-      <Button class="rounded-full bg-black hover:bg-gray-800 text-white px-8 py-6 text-base shadow-lg transition-transform hover:scale-105">
-        ดูรายละเอียดงานสกรีน
+      <Button class="rounded-full bg-gray-900 hover:bg-black text-white px-8 py-3.5 text-base font-semibold shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex items-center gap-2">
+        ดูรายละเอียดงานพิมพ์
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       </Button>
     </div>
 
   </div>
 </section>
+

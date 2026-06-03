@@ -3,9 +3,9 @@ import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 
 interface Props {
-  /** ชื่อหลัก เช่น "Men's" */
+  /** ชื่อหลัก เช่น "เสื้อยืด" */
   title: string;
-  /** บรรทัดที่สอง เช่น "Collection" */
+  /** บรรทัดที่สอง เช่น "คอลเลกชัน" */
   subtitle?: string;
   /** ข้อความอธิบายใต้หัวข้อ */
   description?: string;
@@ -16,16 +16,19 @@ interface Props {
   image: ImageMetadata | string;
   /** ข้อความ alt ที่บรรยายรูปจริง (ห้ามใช้ข้อความซ้ำ ๆ) — สำคัญต่อ SEO/การเข้าถึง */
   alt: string;
+  /** ลิงก์ปลายทางของการ์ด — ทำให้เป็น <a> จริงเพื่อ internal linking (SEO) */
+  href?: string;
   /** ทำให้การ์ดยืดเต็มพื้นที่ (ใช้ตอนวางคู่กับปุ่ม next) */
   flex?: boolean;
 }
 
 const {
   title,
-  subtitle = 'Collection',
-  description = 'The Essence of Modern\nSophistication',
+  subtitle = 'คอลเลกชัน',
+  description = 'งานคุณภาพ ดีไซน์\nทันสมัยใส่ได้ทุกวัน',
   image,
   alt,
+  href = '/products',
   flex = false,
 } = Astro.props;
 
@@ -38,7 +41,10 @@ const imgClass =
 const isRemote = typeof image === 'string';
 ---
 
-<div
+{/* เป็น <a> จริง ไม่ใช่ div cursor-pointer → ส่งน้ำหนัก internal link + เข้าถึงได้ด้วยคีย์บอร์ด */}
+<a
+  href={href}
+  aria-label={`ดู${title}${subtitle}ทั้งหมด`}
   class:list={[
     'bg-white rounded-3xl p-4 flex gap-4 items-center shadow-[0_4px_20px_-10px_rgba(0,0,0,0.05)] border border-gray-100 group cursor-pointer hover:shadow-md transition-shadow',
     flex && 'flex-1',
@@ -53,8 +59,8 @@ const isRemote = typeof image === 'string';
     )}
   </div>
   <div class="flex flex-col justify-center relative w-full h-full">
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="absolute top-0 right-0 text-gray-400 group-hover:text-black transition-colors"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="absolute top-0 right-0 text-gray-400 group-hover:text-black transition-colors"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
     <h3 class="text-xl font-bold mb-1">{title}<br/><span class="text-gray-400 font-normal">{subtitle}</span></h3>
     <p class="text-[10px] text-gray-500 mt-2 leading-tight">{descLine1}<br/>{descLine2}</p>
   </div>
-</div>
+</a>
