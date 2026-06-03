@@ -2,6 +2,7 @@
  * starwind.css = Tailwind v4 + Starwind theme tokens (light/dark) + base layer
  * เพิ่ม custom global styles ของโปรเจคต่อท้ายได้ที่ไฟล์นี้ */
 @import "./starwind.css";
+@plugin "@tailwindcss/typography";
 
 /* ฟอนต์หลักของไซต์ = Prompt (โหลดจาก Google Fonts ใน Layout.astro) */
 @theme {

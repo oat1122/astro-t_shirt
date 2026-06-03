@@ -1,6 +1,11 @@
 ---
 import Layout from '@/layouts/Layout.astro';
+import Navbar from '@/components/Navbar.astro';
+import BlogGrid from '@/components/blog/BlogGrid.astro';
 import { getCollection, render } from 'astro:content';
+import { Image } from 'astro:assets';
+import { SITE } from '@/consts';
+import favicon from '@/assets/favicon.png';
 
 export async function getStaticPaths() {
   const posts = (await getCollection('blog')).filter((p) => !p.data.draft);
@@ -14,32 +19,132 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 const d = post.data;
 
+// URL absolute (เทียบ Astro.site) สำหรับ OG image + JSON-LD
+const ogImage = d.cover ? new URL(d.cover.src, Astro.site).toString() : undefined;
+
 const articleJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'BlogPosting',
   headline: d.title,
   description: d.description,
+  ...(ogImage && { image: ogImage }),
   author: { '@type': 'Person', name: d.author },
+  publisher: {
+    '@type': 'Organization',
+    name: SITE.name,
+    logo: { '@type': 'ImageObject', url: new URL(favicon.src, Astro.site).toString() },
+  },
   datePublished: d.publishedAt.toISOString(),
   ...(d.updatedAt && { dateModified: d.updatedAt.toISOString() }),
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': new URL(`/blog/${post.id}`, Astro.site).toString(),
+  },
 };
 ---
 
-<Layout title={d.title} description={d.description} type="article" jsonLd={articleJsonLd}>
-  <main class="mx-auto max-w-3xl px-4 py-16">
-    <a href="/blog" class="text-muted-foreground text-sm hover:underline">← กลับไปบทความ</a>
-    <h1 class="mt-4 text-3xl font-bold">{d.title}</h1>
-    <p class="text-muted-foreground mt-2 text-sm">
-      {
-        d.publishedAt.toLocaleDateString('th-TH', {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
-        })
-      } · {d.author}
-    </p>
-    <article class="prose mt-8 max-w-none">
-      <Content />
-    </article>
-  </main>
+<Layout title={d.title} description={d.description} image={ogImage} type="article" jsonLd={articleJsonLd}>
+  <div class="min-h-screen bg-white p-2 sm:p-4 md:p-6 font-sans">
+    <div class="max-w-[1400px] mx-auto bg-[#FAFAFA] rounded-[2rem] sm:rounded-[3rem] overflow-hidden relative shadow-sm border border-gray-100">
+
+      <Navbar />
+
+      <main class="px-4 sm:px-8 lg:px-12 pt-8 pb-20">
+        
+        {/* Article Header */}
+        <div class="max-w-4xl mx-auto mt-4 mb-12 px-4">
+          <div class="mb-10">
+            <a href="/blog" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white border border-gray-200 text-gray-500 hover:bg-gray-50 hover:text-gray-900 transition-colors shadow-sm group" title="กลับหน้าบทความ">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transform group-hover:-translate-x-0.5 transition-transform"><path d="m15 18-6-6 6-6"/></svg>
+            </a>
+          </div>
+          
+          <div class="flex flex-col md:flex-row md:items-end justify-between gap-8 pb-10">
+            <div class="flex-1">
+              <div class="flex items-center gap-3 text-sm mb-5">
+                {d.tags && d.tags.length > 0 && (
+                  <span class="inline-flex items-center px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wide bg-gray-900 text-white">
+                    {d.tags[0]}
+                  </span>
+                )}
+                {d.tags && d.tags.length > 0 && <span class="w-1.5 h-1.5 rounded-full bg-gray-300"></span>}
+                <time datetime={d.publishedAt.toISOString()} class="font-medium text-gray-500 flex items-center gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+                  {d.publishedAt.toLocaleDateString('th-TH', { year: 'numeric', month: 'long', day: 'numeric' })}
+                </time>
+              </div>
+              
+              <h1 class="text-4xl sm:text-5xl lg:text-[3.5rem] font-bold text-gray-900 tracking-tight leading-[1.15] text-balance">
+                {d.title}
+              </h1>
+            </div>
+
+            <div class="shrink-0 flex items-center gap-4 bg-white p-2.5 pr-6 rounded-full border border-gray-100 shadow-sm relative top-2">
+              <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-blue-100 to-indigo-50 flex items-center justify-center text-blue-600 ring-2 ring-white">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              </div>
+              <div>
+                <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-0.5">Written By</p>
+                <p class="text-sm font-bold text-gray-900">{d.author}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Cover Image — astro:assets <Image> (WebP/AVIF + width/height กัน CLS) */}
+        {d.cover ? (
+          <div class="max-w-5xl mx-auto mb-16 rounded-[2rem] sm:rounded-[3rem] overflow-hidden shadow-xl aspect-video bg-gray-100">
+             {/* รูปหน้าปกคือ LCP — โหลดทันทีและให้ priority สูง */}
+             <Image
+               src={d.cover}
+               alt={d.coverAlt || d.title}
+               widths={[640, 960, 1280, 1920]}
+               sizes="(max-width: 1024px) 100vw, 1024px"
+               loading="eager"
+               fetchpriority="high"
+               class="w-full h-full object-cover"
+             />
+          </div>
+        ) : (
+          <div class="max-w-5xl mx-auto mb-16 rounded-[2rem] sm:rounded-[3rem] overflow-hidden shadow-xl aspect-video bg-gray-100 flex items-center justify-center">
+             <span class="text-gray-400">ไม่มีรูปภาพหน้าปก</span>
+          </div>
+        )}
+
+        {/* Article Content - Prose */}
+        <article class="max-w-3xl mx-auto prose prose-lg prose-gray">
+          <Content />
+        </article>
+
+        {/* Tags and Share */}
+        <div class="max-w-3xl mx-auto mt-16 pt-8 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-6">
+          <div class="flex flex-wrap items-center gap-3">
+             <span class="text-sm font-semibold text-gray-900">Tags:</span>
+             {d.tags && d.tags.map((tag: string) => (
+                <a href={`/tags/${tag}`} class="px-3 py-1 bg-gray-100 hover:bg-gray-200 rounded-full text-xs font-medium text-gray-600 transition-colors">{tag}</a>
+             ))}
+          </div>
+          <div class="flex items-center gap-4 shrink-0">
+             <span class="text-sm font-semibold text-gray-900">แชร์บทความ:</span>
+             <button class="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-600 transition-colors">f</button>
+             <button class="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-600 transition-colors">X</button>
+             <button class="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-600 transition-colors">in</button>
+          </div>
+        </div>
+
+        {/* Divider */}
+        <div class="max-w-4xl mx-auto my-20 border-t border-gray-200"></div>
+
+        {/* Related Articles - Reusing BlogGrid */}
+        <div class="mt-20">
+          <div class="mb-10 text-center">
+            <h2 class="text-3xl font-bold text-gray-900">บทความที่น่าสนใจเพิ่มเติม</h2>
+          </div>
+          <BlogGrid />
+        </div>
+
+      </main>
+
+    </div>
+  </div>
 </Layout>
