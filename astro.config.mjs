@@ -1,19 +1,19 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig } from "astro/config";
 
-import react from '@astrojs/react';
-import mdx from '@astrojs/mdx';
-import sitemap from '@astrojs/sitemap';
-import robotsTxt from 'astro-robots-txt';
-import tailwindcss from '@tailwindcss/vite';
+import react from "@astrojs/react";
+import mdx from "@astrojs/mdx";
+import sitemap from "@astrojs/sitemap";
+import robotsTxt from "astro-robots-txt";
+import tailwindcss from "@tailwindcss/vite";
 
 // TODO: เปลี่ยนเป็นโดเมนจริงของเว็บ (มีผลต่อ sitemap / robots / rss / canonical URL)
-const SITE_URL = 'https://example.com';
+const SITE_URL = "https://xn--o3c1bj3b4bj8cd.com/";
 
 // https://astro.build/config
 export default defineConfig({
-	// ใช้ static output (SSG) เป็นหลัก ตาม core stack
-  output: 'static',
+  // ใช้ static output (SSG) เป็นหลัก ตาม core stack
+  output: "static",
   site: SITE_URL,
 
   integrations: [
@@ -21,10 +21,40 @@ export default defineConfig({
     react(),
     // MDX สำหรับเนื้อหา content collections
     mdx(),
-    // SEO: sitemap.xml อัตโนมัติ
-    sitemap(),
-    // SEO: robots.txt อัตโนมัติ (อ้างอิง sitemap ให้ด้วย)
-    robotsTxt(),
+    // SEO: sitemap.xml อัตโนมัติ (ดึงจากหน้าที่ build จริง — draft ถูกกรองออกแล้วใน getStaticPaths)
+    sitemap({
+      // ความถี่/ลำดับความสำคัญเริ่มต้นของทุก URL
+      changefreq: "weekly",
+      priority: 0.7,
+      lastmod: new Date(),
+      // ปรับ priority รายหน้า: หน้าแรกสำคัญสุด, หน้า list รองลงมา
+      serialize(item) {
+        if (item.url === `${SITE_URL}/`) {
+          item.priority = 1.0;
+          item.changefreq = "daily";
+        } else if (
+          item.url.endsWith("/products/") ||
+          item.url.endsWith("/blog/")
+        ) {
+          item.priority = 0.8;
+        }
+        return item;
+      },
+    }),
+    // SEO: robots.txt อัตโนมัติ (อ้างอิง sitemap-index.xml ให้ด้วย)
+    robotsTxt({
+      sitemap: true,
+      // host = โดเมนจริง (ไม่มี protocol) — แก้พร้อม SITE_URL
+      host: SITE_URL.replace(/^https?:\/\//, ""),
+      policy: [
+        {
+          userAgent: "*",
+          allow: "/",
+          // กันบอทไม่ให้ไล่ query string ของ search/filter (กัน duplicate/crawl budget)
+          disallow: ["/*?"],
+        },
+      ],
+    }),
   ],
 
   vite: {

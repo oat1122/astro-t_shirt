@@ -1,10 +1,14 @@
 ---
 import CollectionCard from './CollectionCard.astro';
+// import รูปจาก src/assets → astro:assets แปลง WebP/AVIF + ใส่ขนาดกัน CLS อัตโนมัติ
+import tshirtsImg from '@/assets/home/T-Shirts_Collection.png';
+import poloImg from '@/assets/home/Polo-Shirts_Collection.png';
+import sportswearImg from '@/assets/home/Sportswear_Collection.png';
 
 const collections = [
-  { title: "T-Shirts", image: "/images/home/T-Shirts_Collection.png", alt: "T-Shirts Manufacturing" },
-  { title: "Polo Shirts", image: "/images/home/Polo-Shirts_Collection.png", alt: "Polo Shirts Manufacturing" },
-  { title: "Uniforms", image: "https://images.unsplash.com/photo-1584908688463-c7fb8fcbc9bb?auto=format&fit=crop&q=80&w=600", alt: "Uniforms Manufacturing" },
+  { title: "T-Shirts", image: tshirtsImg, alt: "ตัวอย่างงานรับผลิตเสื้อยืดสกรีนลายจากโรงงาน" },
+  { title: "Polo Shirts", image: poloImg, alt: "ตัวอย่างงานรับผลิตเสื้อโปโลปักโลโก้แบรนด์" },
+  { title: "Sportswear", image: sportswearImg, alt: "ตัวอย่างงานรับผลิตชุดกีฬาผ้าระบายอากาศ" },
 ];
 
 // การ์ดสุดท้ายวางคู่กับปุ่ม next จึงดึงออกมาแยก
@@ -14,10 +18,7 @@ const last = collections[collections.length - 1];
 
 {/* Collections Section */}
 <section class="mt-32 lg:mt-24 relative z-20">
-  <!-- <div class="mb-10 text-center">
-    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight">บริการรับผลิตเสื้อและสินค้าของเรา</h2>
-    <p class="text-gray-500 mt-4 text-base max-w-2xl mx-auto">เลือกแบบเสื้อที่คุณต้องการ เรามีบริการรับผลิตครบวงจรพร้อมให้คำปรึกษา</p>
-  </div> -->
+ 
 
   <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 

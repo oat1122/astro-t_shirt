@@ -1,15 +1,14 @@
 ---
 // Navbar — แถบนำทางส่วนหัวของหน้าเว็บ
+import { Image } from 'astro:assets';
+import logo from '@/assets/logo.png';
 ---
 
 <header class="flex items-center justify-between px-8 py-6 lg:px-12">
-  <div class="flex items-center gap-2">
-    <div class="w-8 h-8 rounded-full bg-[#E54524] flex items-center justify-center text-white font-bold italic relative overflow-hidden">
-      <span class="absolute inset-0 bg-white/20 transform -skew-x-12 translate-x-1/2"></span>
-      <span class="relative z-10 text-sm">TP</span>
-    </div>
+  <a href="/" class="flex items-center gap-2">
+    <Image src={logo} alt="Thana Plus" width={32} height={32} class="w-8 h-8" />
     <span class="text-xl font-bold tracking-tight">Thana Plus</span>
-  </div>
+  </a>
 
   <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
     <a href="#" class="flex items-center gap-1 hover:text-gray-600 transition-colors">Services <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></a>

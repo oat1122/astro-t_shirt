@@ -1,4 +1,7 @@
 ---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
 interface Props {
   /** ชื่อหลัก เช่น "Men's" */
   title: string;
@@ -6,7 +9,12 @@ interface Props {
   subtitle?: string;
   /** ข้อความอธิบายใต้หัวข้อ */
   description?: string;
-  image: string;
+  /**
+   * รูปสินค้า — แนะนำให้ import จาก @/assets เพื่อให้ astro:assets
+   * แปลงเป็น WebP/AVIF + ใส่ขนาดอัตโนมัติ (กัน CLS). รองรับ URL ภายนอกเป็น fallback ได้
+   */
+  image: ImageMetadata | string;
+  /** ข้อความ alt ที่บรรยายรูปจริง (ห้ามใช้ข้อความซ้ำ ๆ) — สำคัญต่อ SEO/การเข้าถึง */
   alt: string;
   /** ทำให้การ์ดยืดเต็มพื้นที่ (ใช้ตอนวางคู่กับปุ่ม next) */
   flex?: boolean;
@@ -22,6 +30,12 @@ const {
 } = Astro.props;
 
 const [descLine1, descLine2] = description.split('\n');
+
+// กล่องรูปแสดงผลที่ 96×128px (w-24 h-32) — เรนเดอร์ที่ 2x = 192×256 เพื่อความคมชัดบนจอ retina
+// object-cover ครอปเอง จึงไม่บิดเบือนแม้สัดส่วนต้นฉบับต่างกัน
+const imgClass =
+  'w-full h-full object-cover group-hover:scale-105 transition-transform duration-500';
+const isRemote = typeof image === 'string';
 ---
 
 <div
@@ -31,7 +45,12 @@ const [descLine1, descLine2] = description.split('\n');
   ]}
 >
   <div class="w-24 h-32 rounded-2xl overflow-hidden bg-gray-100 shrink-0">
-    <img src={image} alt={alt} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+    {/* รูปอยู่ใต้ fold → lazy ตาม default; ใส่ขนาดเพื่อกัน CLS */}
+    {isRemote ? (
+      <Image src={image} alt={alt} width={192} height={256} loading="lazy" decoding="async" class={imgClass} />
+    ) : (
+      <Image src={image} alt={alt} width={192} loading="lazy" decoding="async" class={imgClass} />
+    )}
   </div>
   <div class="flex flex-col justify-center relative w-full h-full">
     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="absolute top-0 right-0 text-gray-400 group-hover:text-black transition-colors"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
