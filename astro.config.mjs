@@ -50,7 +50,11 @@ export default defineConfig({
     }),
     // SEO: robots.txt อัตโนมัติ (อ้างอิง sitemap-index.xml ให้ด้วย)
     robotsTxt({
-      sitemap: true,
+      // ระบุ sitemap ทั้ง 2 ไฟล์ชัดเจน (index + ไฟล์จริง sitemap-0.xml)
+      sitemap: [
+        `${SITE_URL.replace(/\/$/, "")}/sitemap-index.xml`,
+        `${SITE_URL.replace(/\/$/, "")}/sitemap-0.xml`,
+      ],
       // host = โดเมนจริง (ไม่มี protocol) — แก้พร้อม SITE_URL
       host: SITE_URL.replace(/^https?:\/\//, "").replace(/\/$/, ""),
       policy: [
