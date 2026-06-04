@@ -52,7 +52,7 @@ export default defineConfig({
     robotsTxt({
       sitemap: true,
       // host = โดเมนจริง (ไม่มี protocol) — แก้พร้อม SITE_URL
-      host: SITE_URL.replace(/^https?:\/\//, ""),
+      host: SITE_URL.replace(/^https?:\/\//, "").replace(/\/$/, ""),
       policy: [
         {
           userAgent: "*",

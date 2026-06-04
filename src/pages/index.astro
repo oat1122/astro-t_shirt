@@ -1,6 +1,5 @@
 ---
-import Layout from '@/layouts/Layout.astro';
-import Navbar from '@/components/Navbar.astro';
+import PageLayout from '@/layouts/PageLayout.astro';
 import Hero from '@/components/home/Hero.astro';
 import Collections from '@/components/home/Collections.astro';
 import ScreenServices from '@/components/home/ScreenServices.astro';
@@ -9,24 +8,14 @@ import WhyChooseUs from '@/components/home/WhyChooseUs.astro';
 import BlogFeed from '@/components/home/BlogFeed.astro';
 ---
 
-<Layout 
+<PageLayout
   title="โรงงานรับผลิตเสื้อครบวงจร สกรีน ตัดเย็บ ออกแบบฟรี | ธน พลัส 153"
   description="บริษัท ธน พลัส 153 จำกัด โรงงานรับผลิตเสื้อยืด โปโล แจ็คเก็ต เสื้อช็อป และกระเป๋าผ้า บริการครบจบในที่เดียว พร้อมงานสกรีน ออกแบบฟรี ส่งฟรีในกรุงเทพฯ"
 >
-  <div class="min-h-screen bg-white p-2 sm:p-4 md:p-6 font-sans">
-    <div class="max-w-[1400px] mx-auto bg-[#FAFAFA] rounded-[2rem] sm:rounded-[3rem] overflow-hidden relative shadow-sm border border-gray-100">
-
-      <Navbar />
-
-      <main class="px-8 lg:px-12 pt-8 pb-12">
-        <Hero />
-        <Collections />
-        <ScreenServices />
-        <Privileges />
-        <WhyChooseUs />
-        <BlogFeed />
-      </main>
-
-    </div>
-  </div>
-</Layout>
+  <Hero />
+  <Collections />
+  <ScreenServices />
+  <Privileges />
+  <WhyChooseUs />
+  <BlogFeed />
+</PageLayout>

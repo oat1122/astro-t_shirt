@@ -1,6 +1,5 @@
 ---
-import Layout from '@/layouts/Layout.astro';
-import Navbar from '@/components/Navbar.astro';
+import PageLayout from '@/layouts/PageLayout.astro';
 import BlogGrid from '@/components/blog/BlogGrid.astro';
 import ArticleHeader from '@/components/blog/ArticleHeader.astro';
 import ArticleCover from '@/components/blog/ArticleCover.astro';
@@ -46,13 +45,7 @@ const articleJsonLd = {
 };
 ---
 
-<Layout title={d.title} description={d.description} image={ogImage} type="article" jsonLd={articleJsonLd}>
-  <div class="min-h-screen bg-white p-2 sm:p-4 md:p-6 font-sans">
-    <div class="max-w-[1400px] mx-auto bg-[#FAFAFA] rounded-[2rem] sm:rounded-[3rem] overflow-hidden relative shadow-sm border border-gray-100">
-
-      <Navbar />
-
-      <main class="px-4 sm:px-8 lg:px-12 pt-8 pb-20">
+<PageLayout title={d.title} description={d.description} image={ogImage} type="article" jsonLd={articleJsonLd}>
 
         <ArticleHeader title={d.title} author={d.author} tags={d.tags} publishedAt={d.publishedAt} />
 
@@ -83,8 +76,4 @@ const articleJsonLd = {
           <BlogGrid title="บทความที่น่าสนใจเพิ่มเติม" excludeId={post.id} showViewAll={false} />
         </div>
 
-      </main>
-
-    </div>
-  </div>
-</Layout>
+</PageLayout>

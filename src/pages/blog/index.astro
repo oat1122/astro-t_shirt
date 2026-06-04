@@ -1,28 +1,17 @@
 ---
-import Layout from '@/layouts/Layout.astro';
-import Navbar from '@/components/Navbar.astro';
+import PageLayout from '@/layouts/PageLayout.astro';
 import BlogHero from '@/components/blog/BlogHero.astro';
 import BlogCategoriesBanner from '@/components/blog/BlogCategoriesBanner.astro';
 import BlogFeatured from '@/components/blog/BlogFeatured.astro';
 import BlogGrid from '@/components/blog/BlogGrid.astro';
 ---
 
-<Layout 
+<PageLayout
   title="บทความและความรู้เรื่องเสื้อผ้า | ธน พลัส 153"
   description="รวมบทความน่ารู้ เทรนด์แฟชั่น เทคนิคงานสกรีน และเคล็ดลับการทำแบรนด์เสื้อผ้า จากโรงงานผลิตเสื้อผ้าครบวงจร ธน พลัส 153"
 >
-  <div class="min-h-screen bg-white p-2 sm:p-4 md:p-6 font-sans">
-    <div class="max-w-[1400px] mx-auto bg-[#FAFAFA] rounded-[2rem] sm:rounded-[3rem] overflow-hidden relative shadow-sm border border-gray-100">
-
-      <Navbar />
-
-      <main class="px-4 sm:px-8 lg:px-12 pt-8 pb-24 sm:pb-32">
-        <BlogHero />
-        <BlogCategoriesBanner />
-        <BlogFeatured />
-        <BlogGrid />
-      </main>
-
-    </div>
-  </div>
-</Layout>
+  <BlogHero />
+  <BlogCategoriesBanner />
+  <BlogFeatured />
+  <BlogGrid />
+</PageLayout>

@@ -1,0 +1,33 @@
+---
+// Page layout — กรอบการ์ดหลักของทุกหน้า (Navbar + กรอบขาว + main)
+// ใช้ครอบ Layout (โครง HTML/SEO) เพื่อให้ระยะขอบทุกหน้าเท่ากัน
+import Layout from '@/layouts/Layout.astro';
+import Navbar from '@/components/Navbar.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  type?: string;
+  noindex?: boolean;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  /** คลาสของ <main> — override padding เฉพาะหน้าได้ (เช่นหน้า 404 จัดกึ่งกลาง) */
+  mainClass?: string;
+}
+
+const {
+  mainClass = 'px-4 sm:px-8 lg:px-12 pt-8 pb-20',
+  ...seo
+} = Astro.props;
+---
+
+<Layout {...seo}>
+  <div class="min-h-screen bg-white p-2 sm:p-4 md:p-6 font-sans">
+    <div class="max-w-[1400px] mx-auto bg-[#FAFAFA] rounded-[2rem] sm:rounded-[3rem] overflow-hidden relative shadow-sm border border-gray-100">
+      <Navbar />
+      <main class={mainClass}>
+        <slot />
+      </main>
+    </div>
+  </div>
+</Layout>
