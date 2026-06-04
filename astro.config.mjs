@@ -55,8 +55,6 @@ export default defineConfig({
         `${SITE_URL.replace(/\/$/, "")}/sitemap-index.xml`,
         `${SITE_URL.replace(/\/$/, "")}/sitemap-0.xml`,
       ],
-      // host = โดเมนจริง (ไม่มี protocol) — แก้พร้อม SITE_URL
-      host: SITE_URL.replace(/^https?:\/\//, "").replace(/\/$/, ""),
       policy: [
         {
           userAgent: "*",
