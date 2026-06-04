@@ -5,6 +5,8 @@ import ArticleHeader from '@/components/blog/ArticleHeader.astro';
 import ArticleCover from '@/components/blog/ArticleCover.astro';
 import ArticleShare from '@/components/blog/ArticleShare.astro';
 import BlogSidebar from '@/components/blog/sidebar/BlogSidebar.astro';
+import Faq from '@/components/Faq.astro';
+import { buildFaqJsonLd } from '@/lib/faq';
 import { getCollection, render } from 'astro:content';
 import { SITE } from '@/consts';
 import favicon from '@/assets/favicon.png';
@@ -43,9 +45,18 @@ const articleJsonLd = {
     '@id': new URL(`/blog/${post.id}`, Astro.site).toString(),
   },
 };
+
+// FAQPage JSON-LD จาก frontmatter (null ถ้าไม่มี faq) — ต่อท้าย BlogPosting ในหน้าเดียวได้
+const faqJsonLd = buildFaqJsonLd(d.faq);
 ---
 
-<PageLayout title={d.title} description={d.description} image={ogImage} type="article" jsonLd={articleJsonLd}>
+<PageLayout
+  title={d.title}
+  description={d.description}
+  image={ogImage}
+  type="article"
+  jsonLd={[articleJsonLd, ...(faqJsonLd ? [faqJsonLd] : [])]}
+>
 
         <ArticleHeader title={d.title} author={d.author} tags={d.tags} publishedAt={d.publishedAt} />
 
@@ -57,6 +68,9 @@ const articleJsonLd = {
             <article class="prose prose-lg prose-gray max-w-none">
               <Content />
             </article>
+
+            {/* FAQ ที่มองเห็นได้ — เรนเดอร์จาก data เดียวกับ FAQPage JSON-LD */}
+            <Faq items={d.faq} />
 
             <div class="mt-12">
               <ArticleShare tags={d.tags} />

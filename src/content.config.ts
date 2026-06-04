@@ -26,6 +26,8 @@ const products = defineCollection({
       inStock: z.boolean().default(true),
       publishedAt: z.coerce.date(),
       updatedAt: z.coerce.date().optional(),
+      // คำถามที่พบบ่อย (ออปชัน) — ป้อนใน frontmatter แล้วได้ทั้ง FAQPage JSON-LD + accordion บนหน้า
+      faq: z.array(z.object({ question: z.string(), answer: z.string() })).optional(),
     }),
 });
 
@@ -45,6 +47,8 @@ const blog = defineCollection({
       draft: z.boolean().default(false),
       publishedAt: z.coerce.date(),
       updatedAt: z.coerce.date().optional(),
+      // คำถามที่พบบ่อย (ออปชัน) — ป้อนใน frontmatter แล้วได้ทั้ง FAQPage JSON-LD + accordion บนหน้า
+      faq: z.array(z.object({ question: z.string(), answer: z.string() })).optional(),
     }),
 });
 

@@ -1,0 +1,47 @@
+---
+// คอมโพเนนต์ FAQ ที่ "มองเห็นได้บนหน้า" — zero-JS ด้วย <details>/<summary>
+// เรนเดอร์จาก data ชุดเดียวกับ FAQPage JSON-LD (กัน schema drift ตามกฎ Google)
+import type { FaqItem } from '@/lib/faq';
+
+interface Props {
+  items?: FaqItem[];
+}
+
+const { items } = Astro.props;
+---
+
+{/* ไม่มีข้อมูล/ว่าง → ไม่เรนเดอร์อะไรเลย */}
+{items && items.length > 0 && (
+  <section class="mt-12" aria-labelledby="faq-heading">
+    <h2 id="faq-heading" class="text-2xl font-bold text-foreground mb-6">
+      คำถามที่พบบ่อย
+    </h2>
+    <div class="divide-y divide-border border-t border-b border-border">
+      {items.map((item) => (
+        <details class="group py-4">
+          <summary class="flex cursor-pointer items-center justify-between gap-4 font-medium text-foreground list-none [&::-webkit-details-marker]:hidden">
+            <span>{item.question}</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="h-5 w-5 shrink-0 text-muted-foreground transition-transform duration-200 group-open:rotate-180"
+              aria-hidden="true"
+            >
+              <path d="m6 9 6 6 6-6" />
+            </svg>
+          </summary>
+          <p class="mt-3 text-muted-foreground leading-relaxed">
+            {item.answer}
+          </p>
+        </details>
+      ))}
+    </div>
+  </section>
+)}

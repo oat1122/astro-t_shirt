@@ -3,6 +3,8 @@ import PageLayout from '@/layouts/PageLayout.astro';
 import { getCollection, render } from 'astro:content';
 
 import ProductGallery from '@/components/products/ProductGallery.astro';
+import Faq from '@/components/Faq.astro';
+import { buildFaqJsonLd } from '@/lib/faq';
 import { SITE } from '@/consts';
 
 // SSG: สร้างหน้าทุกสินค้า ณ build time
@@ -40,6 +42,9 @@ const productJsonLd = {
     itemCondition: 'https://schema.org/NewCondition',
   },
 };
+
+// FAQPage JSON-LD จาก frontmatter (null ถ้าไม่มี faq) — ต่อท้าย Product ในหน้าเดียวได้
+const faqJsonLd = buildFaqJsonLd(d.faq);
 ---
 
 <PageLayout
@@ -47,7 +52,7 @@ const productJsonLd = {
   description={d.description}
   type="product"
   image={d.image.src}
-  jsonLd={productJsonLd}
+  jsonLd={[productJsonLd, ...(faqJsonLd ? [faqJsonLd] : [])]}
 >
   <div class="mx-auto max-w-7xl">
     <div class="mb-12">
@@ -75,5 +80,10 @@ const productJsonLd = {
 
     {/* Full Masonry Gallery */}
     <ProductGallery images={[d.image, ...(d.gallery || [])]} altPrefix={d.title} />
+
+    {/* FAQ ที่มองเห็นได้ — เรนเดอร์จาก data เดียวกับ FAQPage JSON-LD */}
+    <div class="max-w-3xl mx-auto">
+      <Faq items={d.faq} />
+    </div>
   </div>
 </PageLayout>
