@@ -2,6 +2,7 @@
 // ServicesHero — ส่วนหัวหน้าบริการดีไซน์ใหม่สไตล์ Premium Editorial
 // ใช้การแบ่งคอลัมน์ไม่สมมาตร (Asymmetric Split) และสถิติที่จัดแสดงแบบ Grid
 import { Button } from '@/components/starwind/button';
+import Icon from '@/components/Icon.astro';
 
 interface Props {
   /** จำนวนผลงาน/ตัวอย่างจริง (ดึงจาก collection products) */
@@ -47,7 +48,7 @@ const stats = [
           class="rounded-full bg-gray-900 hover:bg-black text-white px-8 h-12 text-base font-semibold shadow-md hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 gap-2 flex items-center justify-center"
         >
           ขอใบเสนอราคาฟรี
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          <Icon name="arrow-right" size={18} />
         </Button>
         <a
           href="/products"

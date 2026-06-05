@@ -61,6 +61,9 @@ Embed JSON-LD directly in `.astro` so it renders static. Route it through the SE
 ### 4. Centralized SEO component + schema-enforced meta
 One `<SEO>` component takes `title`, `description`, `canonical`, `image`, `type`, `jsonLd`, `noindex`. Validate frontmatter with **Zod in Content Collections** so every article/product is forced to have complete meta — it can't ship with a missing description.
 - This repo already has `src/components/SEO.astro` (wraps `astro-seo` + JSON-LD) and `src/layouts/Layout.astro` routing it. Extend those; don't write `<meta>`/`<head>` tags ad-hoc.
+- **Keyword-led titles on money pages.** A centralized SEO component usually appends *only* the site name to the per-page `title` (here `pageTitle = \`${title}  ${SITE.name}\``) — which makes that `title` prop the **sole carrier** of the primary target keyword in `<title>`. Lead the `title` with the keyword, and mirror it in the meta `description` + a real on-page `<h1>`. A generic page title (e.g. "บริการของเรา" / "Our Services") silently drops the keyword from `<title>` — one of the heaviest on-page penalties (audits flag "Keyword not found in the title", ≈ −3).
+- **Verify in the rendered `dist/**/index.html`, not the source** — and grep with a UTF-8-aware tool. On Windows the console codepage will mojibake Thai and give false negatives when you read built HTML back.
+- **Don't mistake a stale deploy for a code bug.** If an external audit flags "keyword missing from content/title" but the current source already contains it, the live site is serving an older build — fix the deploy, not the page. Likewise a `robots.txt` `502`/`404` is hosting, not code, when the file builds into `dist/` correctly.
 
 ### 5. Foundations (don't skip)
 - `@astrojs/sitemap` + a real `robots.txt`

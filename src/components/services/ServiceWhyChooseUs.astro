@@ -4,6 +4,8 @@
 // นำเข้าข้อมูลจุดเด่นร่วมจาก src/lib/services.ts (WHY_CHOOSE_US)
 import { Image } from 'astro:assets';
 import Icon from '@/components/Icon.astro';
+import DarkSection from '@/components/services/DarkSection.astro';
+import Eyebrow from '@/components/services/Eyebrow.astro';
 import { WHY_CHOOSE_US } from '@/lib/services';
 
 // นำเข้ารูปภาพประกอบของโรงงาน
@@ -11,17 +13,10 @@ import whyChooseImg from '@/assets/home/WhyChooseUsHover.png';
 import whyChooseOverlay from '@/assets/home/WhyChooseUs.png';
 ---
 
-<section class="mt-24 lg:mt-32 relative z-20 bg-gray-900 text-white rounded-[3rem] p-10 md:p-16 lg:p-20 overflow-hidden shadow-2xl mx-2 md:mx-0">
-  {/* แสงฟุ้งประดับพื้นหลัง */}
-  <div class="absolute -right-[10%] -top-[20%] w-[50%] h-[150%] bg-white/5 rounded-full blur-3xl pointer-events-none"></div>
-
-  <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-    
+<DarkSection blobClass="-right-[10%] -top-[20%] w-[50%] h-[150%]">
     {/* ฝั่งซ้าย: จุดเด่นการบริการและเหตุผลที่เลือกเรา */}
     <div class="lg:col-span-6 flex flex-col items-start">
-      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 text-xs font-semibold tracking-wider text-gray-300 mb-6 uppercase">
-        <span>ทำไมต้องเลือกเรา · Why Choose Us</span>
-      </div>
+      <Eyebrow variant="dark" class="mb-6">ทำไมต้องเลือกเรา · Why Choose Us</Eyebrow>
       <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-6 leading-tight">
         โรงงานรับผลิตเสื้อผ้าสำเร็จรูป<br />
         <span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400">
@@ -66,6 +61,4 @@ import whyChooseOverlay from '@/assets/home/WhyChooseUs.png';
         class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
       />
     </div>
-
-  </div>
-</section>
+</DarkSection>

@@ -32,15 +32,25 @@ const ICONS = {
     '<path d="M7.502 19.423c2.602 2.105 6.395 2.105 8.996 0c2.602 -2.105 3.262 -5.708 1.566 -8.546l-4.89 -7.26c-.42 -.625 -1.287 -.803 -1.936 -.397a1.376 1.376 0 0 0 -.41 .397l-4.893 7.26c-1.695 2.838 -1.035 6.441 1.567 8.546z" />',
   pencil:
     '<path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" /><path d="M13.5 6.5l4 4" />',
+  'arrow-right':
+    '<path d="M5 12h14" /><path d="m12 5 7 7-7 7" />',
+  'brand-line':
+    '<path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M21 11.5c0 -4.694 -4.03 -8.5 -9 -8.5s-9 3.806 -9 8.5c0 4.204 3.208 7.683 7.554 8.362c.328 .062 .772 .216 .884 .555c.105 .317 .07 .814 .034 1.135c-.035 .313 -.168 1.22 -.184 1.4c-.03 .329 -.154 1.28 .665 .698c.819 -.581 4.407 -2.593 6.13 -3.755c4.917 .013 8.917 -3.992 8.917 -8.4" />',
+  phone:
+    '<path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2" />',
+  mail:
+    '<path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" /><path d="M3 7l9 6l9 -6" />',
 } as const;
 
 interface Props {
   name: keyof typeof ICONS;
   class?: string;
   size?: number | string;
+  /** ความหนาเส้น (default 2) — ใช้กับไอคอนที่ต้องการเส้นหนากว่าปกติ */
+  strokeWidth?: number | string;
 }
 
-const { name, class: className, size = 24 } = Astro.props;
+const { name, class: className, size = 24, strokeWidth = 2 } = Astro.props;
 ---
 <svg
   xmlns="http://www.w3.org/2000/svg"
@@ -49,7 +59,7 @@ const { name, class: className, size = 24 } = Astro.props;
   viewBox="0 0 24 24"
   fill="none"
   stroke="currentColor"
-  stroke-width="2"
+  stroke-width={strokeWidth}
   stroke-linecap="round"
   stroke-linejoin="round"
   class={className}

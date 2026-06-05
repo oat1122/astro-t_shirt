@@ -1,0 +1,28 @@
+---
+// SectionHeading — หัวข้อ section มาตรฐานของหน้าบริการ (eyebrow + h2 + คำโปรย)
+// รวม pattern ที่ซ้ำกันใน ServiceGrid / ServicePrinting / ServiceProcess / ServicePrivileges
+import Eyebrow from '@/components/services/Eyebrow.astro';
+
+interface Props {
+  /** ข้อความใน pill ด้านบน (เช่น 'บริการหลักของเรา · Main Offerings') */
+  eyebrow: string;
+  /** หัวข้อหลัก (h2) */
+  title: string;
+  /** คำโปรยใต้หัวข้อ */
+  intro: string;
+  /** override ระยะห่างด้านล่างของบล็อกหัวข้อ (default mb-12 lg:mb-16) */
+  class?: string;
+}
+
+const { eyebrow, title, intro, class: className = 'mb-12 lg:mb-16' } = Astro.props;
+---
+
+<div class:list={['max-w-3xl', className]}>
+  <Eyebrow variant="light" class="mb-4">{eyebrow}</Eyebrow>
+  <h2 class="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-gray-900 mb-5 leading-tight">
+    {title}
+  </h2>
+  <p class="text-gray-600 text-lg leading-relaxed max-w-2xl">
+    {intro}
+  </p>
+</div>

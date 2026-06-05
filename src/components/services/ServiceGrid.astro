@@ -2,22 +2,16 @@
 // ServiceGrid — การ์ดบริการดีไซน์ใหม่สไตล์โมเดิร์นคาร์ด (Data-driven จาก src/lib/services)
 // ใช้ key-check สำหรับไอคอน และคง ID สำหรับการเข้าถึงลิงก์อย่างถูกต้อง
 import Icon from '@/components/Icon.astro';
+import SectionHeading from '@/components/services/SectionHeading.astro';
 import { SERVICES } from '@/lib/services';
 ---
 
 <section id="services" class="scroll-mt-24 mt-24 lg:mt-32">
-  <div class="max-w-3xl mb-12 lg:mb-16">
-    <div class="flex items-center gap-2 px-3 py-1 rounded-full bg-gray-50 border border-gray-100 text-xs font-semibold tracking-wider text-gray-500 mb-4 uppercase w-fit">
-      <span>บริการหลักของเรา · Main Offerings</span>
-    </div>
-    <h2 class="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-gray-900 mb-5 leading-tight">
-      บริการรับผลิตเสื้อสำเร็จรูปครบวงจร
-    </h2>
-    <p class="text-gray-600 text-lg leading-relaxed max-w-2xl">
-      ตอบโจทย์ทุกความต้องการของธุรกิจคุณด้วยบริการแบบ One-Stop Service ตั้งแต่ดีไซน์แรกเริ่ม 
-      ไปจนถึงขั้นตอนการจัดส่งสินค้าถึงมืออย่างสมบูรณ์แบบ
-    </p>
-  </div>
+  <SectionHeading
+    eyebrow="บริการหลักของเรา · Main Offerings"
+    title="บริการรับผลิตเสื้อสำเร็จรูปครบวงจร"
+    intro="ตอบโจทย์ทุกความต้องการของธุรกิจคุณด้วยบริการแบบ One-Stop Service ตั้งแต่ดีไซน์แรกเริ่ม ไปจนถึงขั้นตอนการจัดส่งสินค้าถึงมืออย่างสมบูรณ์แบบ"
+  />
 
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
     {SERVICES.map((s, idx) => (

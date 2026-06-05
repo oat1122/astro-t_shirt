@@ -3,6 +3,7 @@
 // แทนที่การนำเข้าโดยตรงจาก home/Privileges.astro
 // นำเข้าข้อมูลจุดเด่นร่วมจาก src/lib/services.ts (PRIVILEGES)
 import { Image } from 'astro:assets';
+import SectionHeading from '@/components/services/SectionHeading.astro';
 import { PRIVILEGES } from '@/lib/services';
 
 // นำเข้ารูปภาพสัญลักษณ์สำหรับสิทธิพิเศษ
@@ -33,18 +34,11 @@ const PRIVILEGE_IMAGES = {
 ---
 
 <section class="mt-24 lg:mt-32">
-  <div class="max-w-3xl mb-12 lg:mb-16">
-    <div class="flex items-center gap-2 px-3 py-1 rounded-full bg-gray-50 border border-gray-100 text-xs font-semibold tracking-wider text-gray-500 mb-4 uppercase w-fit">
-      <span>สิทธิพิเศษเมื่อผลิตเสื้อกับเรา · Privileges</span>
-    </div>
-    <h2 class="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-gray-900 mb-5 leading-tight">
-      สิทธิพิเศษสุดคุ้ม 4 ต่อฟรี
-    </h2>
-    <p class="text-gray-600 text-lg leading-relaxed max-w-2xl">
-      เพื่อให้ลูกค้าของเราได้รับความคุ้มค่าและสะดวกสบายที่สุดในการผลิตเสื้อ 
-      เรามีข้อเสนอพิเศษเพิ่มเติมโดยไม่มีค่าใช้จ่ายแฝง
-    </p>
-  </div>
+  <SectionHeading
+    eyebrow="สิทธิพิเศษเมื่อผลิตเสื้อกับเรา · Privileges"
+    title="สิทธิพิเศษสุดคุ้ม 4 ต่อฟรี"
+    intro="เพื่อให้ลูกค้าของเราได้รับความคุ้มค่าและสะดวกสบายที่สุดในการผลิตเสื้อ เรามีข้อเสนอพิเศษเพิ่มเติมโดยไม่มีค่าใช้จ่ายแฝง"
+  />
 
   {/* ตารางสิทธิพิเศษ 4 ด้าน */}
   <div class="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-8">

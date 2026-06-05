@@ -1,6 +1,8 @@
 ---
 // ServiceProcess — ขั้นตอนการสั่งผลิตเสื้อดีไซน์ใหม่สไตล์โมเดิร์นไทม์ไลน์
 // ใช้คลาส ID สำหรับการนำทางของลิงก์และคลาส scroll-mt-24 เพื่อการเลื่อนที่ราบรื่น
+import SectionHeading from '@/components/services/SectionHeading.astro';
+
 const steps = [
   {
     title: 'ปรึกษา & ขอใบเสนอราคา',
@@ -30,18 +32,12 @@ const steps = [
 ---
 
 <section id="process" class="scroll-mt-24 mt-24 lg:mt-32">
-  <div class="max-w-3xl mb-16 lg:mb-20">
-    <div class="flex items-center gap-2 px-3 py-1 rounded-full bg-gray-50 border border-gray-100 text-xs font-semibold tracking-wider text-gray-500 mb-4 uppercase w-fit">
-      <span>ขั้นตอนและมาตรฐานการบริการ · Workflow</span>
-    </div>
-    <h2 class="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-gray-900 mb-5 leading-tight">
-      สั่งผลิตเสื้อคุณภาพใน 6 ขั้นตอนง่ายๆ
-    </h2>
-    <p class="text-gray-600 text-lg leading-relaxed max-w-2xl">
-      สัมผัสขั้นตอนการทำงานที่เป็นระบบและชัดเจนตั้งแต่เริ่มต้นพูดคุย 
-      ไปจนถึงการได้รับมอบสินค้าคุณภาพดีที่ตรงใจคุณที่สุด
-    </p>
-  </div>
+  <SectionHeading
+    class="mb-16 lg:mb-20"
+    eyebrow="ขั้นตอนและมาตรฐานการบริการ · Workflow"
+    title="สั่งผลิตเสื้อคุณภาพใน 6 ขั้นตอนง่ายๆ"
+    intro="สัมผัสขั้นตอนการทำงานที่เป็นระบบและชัดเจนตั้งแต่เริ่มต้นพูดคุย ไปจนถึงการได้รับมอบสินค้าคุณภาพดีที่ตรงใจคุณที่สุด"
+  />
 
   {/* แผงขั้นตอนการสั่งผลิต */}
   <div class="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-12 gap-x-8">

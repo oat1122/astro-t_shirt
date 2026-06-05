@@ -1,0 +1,30 @@
+---
+// DarkSection — เปลือกพาเนลสีเข้มทรงโค้งมนพร้อมแสงฟุ้งประดับ (ใช้ซ้ำ)
+// ใช้ใน ServiceWhyChooseUs และ ServiceCta — ต่างกันแค่ id, ระยะ scroll และตำแหน่งแสงฟุ้ง
+// เนื้อหา 2 คอลัมน์ส่งเข้ามาทาง <slot /> (grid-12 จัดการให้แล้ว)
+interface Props {
+  /** id ของ section (เช่น 'contact') */
+  id?: string;
+  /** คลาสเสริมของ <section> เช่น scroll-mt-24 */
+  class?: string;
+  /** คลาสกำหนดตำแหน่ง/ขนาดของแสงฟุ้งประดับ */
+  blobClass?: string;
+}
+
+const { id, class: className = '', blobClass = '' } = Astro.props;
+---
+
+<section
+  id={id}
+  class:list={[
+    'mt-24 lg:mt-32 relative z-20 bg-gray-900 text-white rounded-[3rem] p-10 md:p-16 lg:p-20 overflow-hidden shadow-2xl mx-2 md:mx-0',
+    className,
+  ]}
+>
+  {/* แสงฟุ้งประดับพื้นหลัง */}
+  <div class:list={['absolute bg-white/5 rounded-full blur-3xl pointer-events-none', blobClass]}></div>
+
+  <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+    <slot />
+  </div>
+</section>

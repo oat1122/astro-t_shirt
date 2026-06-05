@@ -1,0 +1,27 @@
+---
+// Eyebrow — ป้ายหมวดเล็ก (pill) เหนือหัวข้อ section ของหน้าบริการ
+// รวม pill ที่ซ้ำกันทั้งแบบพื้นสว่าง (light) และบนพาเนลสีเข้ม (dark)
+// margin ปล่อยให้ผู้เรียกกำหนดผ่าน prop `class` เพราะระยะห่างต่างกันตามบริบท
+interface Props {
+  /** โทนพื้นหลัง: 'light' = บนพื้นขาว, 'dark' = บนพาเนลสีเข้ม */
+  variant?: 'light' | 'dark';
+  /** จุดกะพริบนำหน้า (ใช้ในจุดที่อยากเน้น) */
+  pulse?: boolean;
+  /** คลาสเสริม เช่น margin-bottom ต่อจุดใช้งาน */
+  class?: string;
+}
+
+const { variant = 'light', pulse = false, class: className = '' } = Astro.props;
+
+const base =
+  'inline-flex items-center gap-2 rounded-full text-xs font-semibold tracking-wider uppercase';
+const variants = {
+  light: 'px-3 py-1 bg-gray-50 border border-gray-100 text-gray-500',
+  dark: 'px-3 py-1.5 bg-white/10 text-gray-300',
+} as const;
+---
+
+<div class:list={[base, variants[variant], className]}>
+  {pulse && <span class="inline-block h-1.5 w-1.5 rounded-full bg-gray-900 animate-pulse"></span>}
+  <span><slot /></span>
+</div>

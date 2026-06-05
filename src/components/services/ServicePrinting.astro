@@ -4,6 +4,7 @@
 // กำหนดภาพด้วย Join Key เพื่อหลีกเลี่ยงการจับคู่ผ่านดัชนีอาร์เรย์
 import { Image } from 'astro:assets';
 import Icon from '@/components/Icon.astro';
+import SectionHeading from '@/components/services/SectionHeading.astro';
 import { SERVICES } from '@/lib/services';
 
 // นำเข้ารูปภาพสำหรับเทคนิคงานสกรีน
@@ -35,18 +36,12 @@ const printingServices = SERVICES.filter((s) => s.printing && s.key && s.key in 
 ---
 
 <section id="screen" class="scroll-mt-24 mt-24 lg:mt-32">
-  <div class="max-w-3xl mb-16 lg:mb-20">
-    <div class="flex items-center gap-2 px-3 py-1 rounded-full bg-gray-50 border border-gray-100 text-xs font-semibold tracking-wider text-gray-500 mb-4 uppercase w-fit">
-      <span>เทคนิคและนวัตกรรมสกรีน · Print Techniques</span>
-    </div>
-    <h2 class="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-gray-900 mb-5 leading-tight">
-      งานสกรีน & งานพิมพ์ระบบดิจิทัล
-    </h2>
-    <p class="text-gray-600 text-lg leading-relaxed max-w-2xl">
-      ตอบสนองทุกงานดีไซน์ที่เป็นเอกลักษณ์ของคุณ ด้วยเทคโนโลยีและช่างพิมพ์ที่มีความชำนาญสูง 
-      เลือกใช้เทคนิคที่คุ้มงบและสวยงามที่สุด
-    </p>
-  </div>
+  <SectionHeading
+    class="mb-16 lg:mb-20"
+    eyebrow="เทคนิคและนวัตกรรมสกรีน · Print Techniques"
+    title="งานสกรีน & งานพิมพ์ระบบดิจิทัล"
+    intro="ตอบสนองทุกงานดีไซน์ที่เป็นเอกลักษณ์ของคุณ ด้วยเทคโนโลยีและช่างพิมพ์ที่มีความชำนาญสูง เลือกใช้เทคนิคที่คุ้มงบและสวยงามที่สุด"
+  />
 
   <div class="space-y-20 lg:space-y-28">
     {printingServices.map((s, index) => {
@@ -82,20 +77,12 @@ const printingServices = SERVICES.filter((s) => s.printing && s.key && s.key in 
               class="inline-flex items-center gap-1.5 text-sm font-bold text-gray-900 hover:text-black border-b-2 border-gray-900 pb-1 transition-colors group"
             >
               ปรึกษาเทคนิคลายพิมพ์นี้
-              <svg 
-                xmlns="http://www.w3.org/2000/svg" 
-                width="16" 
-                height="16" 
-                viewBox="0 0 24 24" 
-                fill="none" 
-                stroke="currentColor" 
-                stroke-width="2.5" 
-                stroke-linecap="round" 
-                stroke-linejoin="round" 
+              <Icon
+                name="arrow-right"
+                size={16}
+                strokeWidth={2.5}
                 class="transform group-hover:translate-x-1 transition-transform duration-300"
-              >
-                <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
-              </svg>
+              />
             </a>
           </div>
 
