@@ -12,7 +12,11 @@ import WhyChooseUs from '@/components/home/WhyChooseUs.astro';
 import ServiceCta from '@/components/services/ServiceCta.astro';
 import Faq from '@/components/Faq.astro';
 import { buildFaqJsonLd, type FaqItem } from '@/lib/faq';
+import { SERVICES } from '@/lib/services';
 import { SITE } from '@/consts';
+
+// URL หน้านี้ (absolute) — ใช้ใน JSON-LD ของ Service และ Breadcrumb
+const pageUrl = new URL('/services', Astro.site).toString();
 
 // จำนวนผลงานจริงสำหรับโชว์เป็นสถิติใน hero
 const works = (await getCollection('products')).length;
@@ -54,21 +58,46 @@ const faqItems: FaqItem[] = [
 const faqJsonLd = buildFaqJsonLd(faqItems);
 
 // Service JSON-LD — อธิบายบริการของโรงงานสำหรับ search/LLM crawler
+// hasOfferCatalog สร้างจาก SERVICES ชุดเดียวกับ ServiceGrid → ตรงกับที่เห็นบนหน้าเสมอ
 const serviceJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Service',
   serviceType: 'รับผลิตเสื้อ สกรีน และงานพิมพ์ผ้าครบวงจร',
   name: 'บริการรับผลิตเสื้อครบวงจร',
+  description: SITE.description,
+  url: pageUrl,
   provider: {
     '@type': 'Organization',
     name: SITE.name,
     url: Astro.site?.toString(),
   },
   areaServed: { '@type': 'Country', name: 'Thailand' },
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'บริการรับผลิตเสื้อ',
+    itemListElement: SERVICES.map((s) => ({
+      '@type': 'Offer',
+      itemOffered: {
+        '@type': 'Service',
+        name: s.title,
+        description: s.description,
+      },
+    })),
+  },
+};
+
+// Breadcrumb JSON-LD — หน้าแรก → บริการของเรา (ช่วย rich result + ความเข้าใจโครงเว็บ)
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'หน้าแรก', item: Astro.site?.toString() },
+    { '@type': 'ListItem', position: 2, name: 'บริการของเรา', item: pageUrl },
+  ],
 };
 
 // รวม JSON-LD ทั้งหมด (กรอง null ของ FAQ ออก)
-const jsonLd = [serviceJsonLd, ...(faqJsonLd ? [faqJsonLd] : [])];
+const jsonLd = [serviceJsonLd, breadcrumbJsonLd, ...(faqJsonLd ? [faqJsonLd] : [])];
 ---
 
 <PageLayout
