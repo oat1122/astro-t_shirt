@@ -9,7 +9,7 @@ export default [
   ...eslintPluginAstro.configs.recommended,
   {
     // ไฟล์ฝั่ง Node (config + เซิร์ฟเวอร์ deploy) — ให้รู้จัก process/__dirname/require
-    files: ["*.{js,mjs,cjs}", "astro.config.mjs", "server.js"],
+    files: ["*.{js,mjs,cjs}", "scripts/**/*.{js,mjs,cjs}", "astro.config.mjs", "server.js"],
     languageOptions: {
       globals: globals.node,
     },
