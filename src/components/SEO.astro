@@ -41,6 +41,16 @@ const defaultJsonLd = [
     name: SITE.name,
     url: Astro.site?.toString(),
     logo: new URL('/favicon.svg', Astro.site).toString(),
+    telephone: SITE.contact.phone,
+    email: SITE.contact.email,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: '503 ถนนสุโขทัย แขวงสวนจิตรลดา',
+      addressLocality: 'เขตดุสิต',
+      addressRegion: 'กรุงเทพมหานคร',
+      postalCode: '10300',
+      addressCountry: 'TH',
+    },
   },
   {
     '@context': 'https://schema.org',

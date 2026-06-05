@@ -1,14 +1,15 @@
 ---
 // หน้าบริการ /services — ปลายทางของลิงก์ Services บน Navbar
-// ประกอบ section ใหม่ (services/*) + reuse section จากหน้าแรก (home/*)
+// ประกอบด้วยคอมโพเนนต์ใหม่ (services/*) ทั้งหมด เพื่อเพิ่มเอกลักษณ์เฉพาะของหน้าบริการ
+// พร้อมปรับปรุงข้อมูลโครงสร้าง SEO (JSON-LD) ให้สอดคล้องกับช่องทางการติดต่อจริง
 import PageLayout from '@/layouts/PageLayout.astro';
 import { getCollection } from 'astro:content';
 import ServicesHero from '@/components/services/ServicesHero.astro';
 import ServiceGrid from '@/components/services/ServiceGrid.astro';
-import ScreenServices from '@/components/home/ScreenServices.astro';
+import ServicePrinting from '@/components/services/ServicePrinting.astro';
 import ServiceProcess from '@/components/services/ServiceProcess.astro';
-import Privileges from '@/components/home/Privileges.astro';
-import WhyChooseUs from '@/components/home/WhyChooseUs.astro';
+import ServiceWhyChooseUs from '@/components/services/ServiceWhyChooseUs.astro';
+import ServicePrivileges from '@/components/services/ServicePrivileges.astro';
 import ServiceCta from '@/components/services/ServiceCta.astro';
 import Faq from '@/components/Faq.astro';
 import { buildFaqJsonLd, type FaqItem } from '@/lib/faq';
@@ -59,6 +60,7 @@ const faqJsonLd = buildFaqJsonLd(faqItems);
 
 // Service JSON-LD — อธิบายบริการของโรงงานสำหรับ search/LLM crawler
 // hasOfferCatalog สร้างจาก SERVICES ชุดเดียวกับ ServiceGrid → ตรงกับที่เห็นบนหน้าเสมอ
+// provider ใช้โครงสร้างของ LocalBusiness เพื่อระบุเบอร์โทรศัพท์ อีเมล และที่อยู่อย่างชัดเจน
 const serviceJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Service',
@@ -67,9 +69,21 @@ const serviceJsonLd = {
   description: SITE.description,
   url: pageUrl,
   provider: {
-    '@type': 'Organization',
+    '@type': 'LocalBusiness',
     name: SITE.name,
+    image: new URL('/favicon.png', Astro.site).toString(),
     url: Astro.site?.toString(),
+    telephone: SITE.contact.phone,
+    email: SITE.contact.email,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: '503 ถนนสุโขทัย แขวงสวนจิตรลดา',
+      addressLocality: 'เขตดุสิต',
+      addressRegion: 'กรุงเทพมหานคร',
+      postalCode: '10300',
+      addressCountry: 'TH',
+    },
+    priceRange: '$$',
   },
   areaServed: { '@type': 'Country', name: 'Thailand' },
   hasOfferCatalog: {
@@ -86,7 +100,7 @@ const serviceJsonLd = {
   },
 };
 
-// Breadcrumb JSON-LD — หน้าแรก → บริการของเรา (ช่วย rich result + ความเข้าใจโครงเว็บ)
+// Breadcrumb JSON-LD — หน้าแรก → บริการของเรา
 const breadcrumbJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
@@ -107,14 +121,14 @@ const jsonLd = [serviceJsonLd, breadcrumbJsonLd, ...(faqJsonLd ? [faqJsonLd] : [
 >
   <ServicesHero works={works} />
   <ServiceGrid />
-  <ScreenServices />
+  <ServicePrinting />
   <ServiceProcess />
-  <Privileges />
-  <WhyChooseUs />
-  <ServiceCta />
+  <ServiceWhyChooseUs />
+  <ServicePrivileges />
   <Faq
     items={faqItems}
     title="คำถามที่พบบ่อยเกี่ยวกับบริการ"
     class="mt-24 lg:mt-32 max-w-4xl mx-auto"
   />
+  <ServiceCta />
 </PageLayout>

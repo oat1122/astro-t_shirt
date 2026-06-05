@@ -1,0 +1,76 @@
+---
+// ServicePrivileges — สิทธิพิเศษดีไซน์ใหม่สไตล์ Grid Privilege Cards
+// แทนที่การนำเข้าโดยตรงจาก home/Privileges.astro
+// นำเข้าข้อมูลจุดเด่นร่วมจาก src/lib/services.ts (PRIVILEGES)
+import { Image } from 'astro:assets';
+import { PRIVILEGES } from '@/lib/services';
+
+// นำเข้ารูปภาพสัญลักษณ์สำหรับสิทธิพิเศษ
+import designFreeImg from '@/assets/home/Privileges/บริการออกแบบก่อน-ผลิตเสื้อ.png';
+import screenFreeImg from '@/assets/home/Privileges/silk-screen.png';
+import shippingFreeImg from '@/assets/home/Privileges/จัดส่งเสื้อยืดหลังจาก-ผลิตเสื้อยืดเสร็จ.png';
+import consultFreeImg from '@/assets/home/Privileges/ปรึกษาฟรี.png';
+
+// จับคู่ Key ใน PRIVILEGES กับตัวแปรภาพที่นำเข้าจริง
+const PRIVILEGE_IMAGES = {
+  design: {
+    src: designFreeImg,
+    alt: 'บริการช่วยออกแบบเสื้อโดยดีไซเนอร์มืออาชีพก่อนผลิตจริง',
+  },
+  screen: {
+    src: screenFreeImg,
+    alt: 'สกรีนเสื้อฟรี 1 จุด เมื่อสั่งผลิตเสื้อครบตามเงื่อนไขขั้นต่ำ',
+  },
+  shipping: {
+    src: shippingFreeImg,
+    alt: 'บริการจัดส่งเสื้อผ้าสำเร็จรูปฟรีรวดเร็วและปลอดภัย',
+  },
+  consult: {
+    src: consultFreeImg,
+    alt: 'ให้คำปรึกษาฟรีทุกขั้นตอนตั้งแต่การเลือกชนิดผ้าจนถึงงบประมาณ',
+  },
+} as const;
+---
+
+<section class="mt-24 lg:mt-32">
+  <div class="max-w-3xl mb-12 lg:mb-16">
+    <div class="flex items-center gap-2 px-3 py-1 rounded-full bg-gray-50 border border-gray-100 text-xs font-semibold tracking-wider text-gray-500 mb-4 uppercase w-fit">
+      <span>สิทธิพิเศษเมื่อผลิตเสื้อกับเรา · Privileges</span>
+    </div>
+    <h2 class="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-gray-900 mb-5 leading-tight">
+      สิทธิพิเศษสุดคุ้ม 4 ต่อฟรี
+    </h2>
+    <p class="text-gray-600 text-lg leading-relaxed max-w-2xl">
+      เพื่อให้ลูกค้าของเราได้รับความคุ้มค่าและสะดวกสบายที่สุดในการผลิตเสื้อ 
+      เรามีข้อเสนอพิเศษเพิ่มเติมโดยไม่มีค่าใช้จ่ายแฝง
+    </p>
+  </div>
+
+  {/* ตารางสิทธิพิเศษ 4 ด้าน */}
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-8">
+    {PRIVILEGES.map((item) => {
+      const imgData = PRIVILEGE_IMAGES[item.key as keyof typeof PRIVILEGE_IMAGES];
+
+      return (
+        <article class="flex flex-col items-center text-center group cursor-pointer bg-white border border-gray-100 rounded-[2rem] p-6 shadow-sm hover:shadow-lg hover:border-gray-200 transition-all duration-500 hover:-translate-y-1">
+          {/* กล่องบรรจุภาพสัญลักษณ์ทรงกลมขนาดพรีเมียม */}
+          <div class="w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden border border-gray-100 shadow-sm bg-white mb-5 group-hover:scale-105 group-hover:border-gray-200 transition-all duration-500">
+            <Image
+              src={imgData.src}
+              alt={imgData.alt}
+              widths={[120, 200]}
+              sizes="(min-width: 768px) 15vw, 30vw"
+              class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+            />
+          </div>
+          <h3 class="text-base md:text-lg font-extrabold text-gray-900 mb-2 uppercase tracking-wide group-hover:text-black transition-colors">
+            {item.title}
+          </h3>
+          <p class="text-gray-500 text-xs md:text-sm leading-relaxed group-hover:text-gray-700 transition-colors">
+            {item.description}
+          </p>
+        </article>
+      );
+    })}
+  </div>
+</section>

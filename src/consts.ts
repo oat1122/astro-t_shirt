@@ -14,4 +14,12 @@ export const SITE = {
   social: {
     twitter: '@astrotshirt',
   },
+  contact: {
+    phone: '090-201-9121',
+    phoneLink: 'tel:0902019121',
+    line: '@thanaplus',
+    lineLink: 'https://line.me/R/ti/p/%40thanaplus',
+    email: 'thanaplusonline@gmail.com',
+    address: '503 ถนนสุโขทัย แขวงสวนจิตรลดา เขตดุสิต กรุงเทพมหานคร 10300',
+  },
 } as const;
