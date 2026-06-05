@@ -36,16 +36,43 @@ export default defineConfig({
       lastmod: new Date(),
       // กันไฟล์ข้อมูลพรีวิว (endpoint .json) ไม่ให้หลุดลง sitemap
       filter: (page) => !page.endsWith("/blog-previews.json"),
-      // ปรับ priority รายหน้า: หน้าแรกสำคัญสุด, หน้า list รองลงมา
+      // ปรับ priority/changefreq รายหน้าให้สะท้อนความสำคัญจริง
+      // เทียบด้วย pathname (กันปัญหา trailing slash จาก SITE_URL)
       serialize(item) {
-        if (item.url === `${SITE_URL}/`) {
+        const path = new URL(item.url).pathname;
+
+        if (path === "/") {
+          // หน้าแรก — สำคัญสุด อัปเดตบ่อย
           item.priority = 1.0;
           item.changefreq = EnumChangefreq.DAILY;
-        } else if (
-          item.url.endsWith("/products/") ||
-          item.url.endsWith("/blog/")
-        ) {
+        } else if (path === "/services/") {
+          // หน้าบริการ "รับผลิตเสื้อ" — money page หลัก
+          item.priority = 0.9;
+          item.changefreq = EnumChangefreq.WEEKLY;
+        } else if (path === "/products/") {
+          // หน้า list สินค้า — ทางเข้าหลักของ catalog
+          item.priority = 0.9;
+          item.changefreq = EnumChangefreq.WEEKLY;
+        } else if (path === "/blog/") {
+          // หน้า list บล็อก — hub ของคอนเทนต์
           item.priority = 0.8;
+          item.changefreq = EnumChangefreq.WEEKLY;
+        } else if (path.startsWith("/products/")) {
+          // หน้าสินค้ารายชิ้น
+          item.priority = 0.8;
+          item.changefreq = EnumChangefreq.WEEKLY;
+        } else if (path.startsWith("/blog/")) {
+          // บทความบล็อกรายชิ้น — เผยแพร่แล้วเปลี่ยนไม่บ่อย
+          item.priority = 0.7;
+          item.changefreq = EnumChangefreq.MONTHLY;
+        } else if (path.startsWith("/category/")) {
+          // หน้า category (หมวดหมู่บล็อก) — taxonomy
+          item.priority = 0.5;
+          item.changefreq = EnumChangefreq.WEEKLY;
+        } else if (path.startsWith("/tag/")) {
+          // หน้า tag — taxonomy ละเอียดสุด ความสำคัญต่ำสุด
+          item.priority = 0.4;
+          item.changefreq = EnumChangefreq.WEEKLY;
         }
         return item;
       },
