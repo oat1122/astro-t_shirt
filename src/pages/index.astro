@@ -6,11 +6,51 @@ import ScreenServices from '@/components/home/ScreenServices.astro';
 import Privileges from '@/components/home/Privileges.astro';
 import WhyChooseUs from '@/components/home/WhyChooseUs.astro';
 import BlogFeed from '@/components/home/BlogFeed.astro';
+import Faq from '@/components/Faq.astro';
+import { buildFaqJsonLd, type FaqItem } from '@/lib/faq';
+
+// คำถามที่พบบ่อยของหน้าแรก — แหล่งข้อมูลชุดเดียว ป้อนทั้ง accordion + FAQPage JSON-LD
+const faqItems: FaqItem[] = [
+  {
+    question: 'รับผลิตเสื้ออะไรบ้าง?',
+    answer:
+      'เรารับผลิตเสื้อยืด เสื้อโปโล แจ็คเก็ต เสื้อช็อป และกระเป๋าผ้า แบบครบวงจรในที่เดียว ตั้งแต่เลือกเนื้อผ้า ตัดเย็บ สกรีน ตรวจสอบคุณภาพ แพ็ค ไปจนถึงจัดส่งถึงมือคุณ',
+  },
+  {
+    question: 'มีบริการช่วยออกแบบให้ไหม?',
+    answer:
+      'มีบริการช่วยออกแบบฟรี (Design Free) พร้อมทีมงานมืออาชีพให้คำปรึกษาฟรีทุกขั้นตอน ตั้งแต่เลือกแบบเสื้อ เลือกเนื้อผ้า ไปจนถึงเทคนิคการสกรีนที่เหมาะกับงานของคุณ',
+  },
+  {
+    question: 'รองรับงานสกรีนแบบไหนบ้าง?',
+    answer:
+      'รองรับทั้งงานสกรีนบล็อก (ซิลค์สกรีน) และสกรีนดิจิตอล โดยทีมงานจะแนะนำเทคนิคที่เหมาะกับลวดลายและจำนวนที่สั่งผลิต เพื่อให้ได้งานคุณภาพในราคาที่คุ้มค่า',
+  },
+  {
+    question: 'มีสิทธิพิเศษหรือโปรโมชันอะไรบ้าง?',
+    answer:
+      'ออกแบบฟรี, สกรีนฟรี 1 สี 1 จุด เมื่อสั่งผลิตครบ 100 ตัว, ส่งฟรีเฉพาะในกรุงเทพฯ เมื่อมียอดสั่งครบ 20,000 บาท และให้คำปรึกษาฟรีทุกขั้นตอน',
+  },
+  {
+    question: 'ทำไมต้องเลือกโรงงานผลิตเสื้อ ธน พลัส 153?',
+    answer:
+      'เราผลิตด้วยเครื่องจักรและทีมช่างมืออาชีพในทุกขั้นตอน ควบคุมงานตามมาตรฐาน QPC (Quality, Price, Control) ด้วยประสบการณ์กว่า 10 ปี ที่แบรนด์และองค์กรชั้นนำไว้วางใจ',
+  },
+  {
+    question: 'สั่งผลิตเสื้อเริ่มต้นอย่างไร?',
+    answer:
+      'เพียงทักเข้ามาปรึกษากับทีมงานได้ฟรี แจ้งแบบเสื้อ จำนวน และลวดลายที่ต้องการ ทีมงานจะช่วยประเมินราคา แนะนำเนื้อผ้าและเทคนิคสกรีน พร้อมออกแบบให้ก่อนเริ่มผลิตจริง',
+  },
+];
+
+// FAQPage JSON-LD จากชุดข้อมูลเดียวกับ accordion (กัน schema drift)
+const faqJsonLd = buildFaqJsonLd(faqItems);
 ---
 
 <PageLayout
   title="โรงงานรับผลิตเสื้อครบวงจร สกรีน ตัดเย็บ ออกแบบฟรี"
   description="บริษัท ธน พลัส 153 จำกัด โรงงานรับผลิตเสื้อยืด โปโล แจ็คเก็ต เสื้อช็อป และกระเป๋าผ้า บริการครบจบในที่เดียว พร้อมงานสกรีน ออกแบบฟรี ส่งฟรีในกรุงเทพฯ"
+  jsonLd={faqJsonLd ?? undefined}
 >
   <Hero />
   <Collections />
@@ -18,4 +58,9 @@ import BlogFeed from '@/components/home/BlogFeed.astro';
   <Privileges />
   <WhyChooseUs />
   <BlogFeed />
+  <Faq
+    items={faqItems}
+    title="คำถามที่พบบ่อย"
+    class="mt-24 lg:mt-32 mb-20 max-w-4xl mx-auto"
+  />
 </PageLayout>

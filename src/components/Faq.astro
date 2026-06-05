@@ -5,17 +5,32 @@ import type { FaqItem } from '@/lib/faq';
 
 interface Props {
   items?: FaqItem[];
+  /** หัวข้อของส่วน FAQ — ส่งสตริงว่างเพื่อซ่อนหัวข้อ */
+  title?: string;
+  /** คลาสของ <section> — override ระยะห่าง/ความกว้างต่อหน้าได้ (default mt-12) */
+  class?: string;
 }
 
-const { items } = Astro.props;
+const {
+  items,
+  title = 'คำถามที่พบบ่อย',
+  class: className = 'mt-12',
+} = Astro.props;
 ---
 
 {/* ไม่มีข้อมูล/ว่าง → ไม่เรนเดอร์อะไรเลย */}
 {items && items.length > 0 && (
-  <section class="mt-12" aria-labelledby="faq-heading">
-    <h2 id="faq-heading" class="text-2xl font-bold text-foreground mb-6">
-      คำถามที่พบบ่อย
-    </h2>
+  <section
+    class:list={[className]}
+    {...(title
+      ? { 'aria-labelledby': 'faq-heading' }
+      : { 'aria-label': 'คำถามที่พบบ่อย' })}
+  >
+    {title && (
+      <h2 id="faq-heading" class="text-2xl font-bold text-foreground mb-6">
+        {title}
+      </h2>
+    )}
     <div class="divide-y divide-border border-t border-b border-border">
       {items.map((item) => (
         <details class="group py-4">
