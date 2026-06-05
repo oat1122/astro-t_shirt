@@ -1,4 +1,4 @@
-// สร้างรูปปกบทความบล็อกด้วย Replicate google/imagen-4 (โทนน้ำเงิน-เทา)
+// สร้างรูปปกบทความบล็อกด้วย Replicate black-forest-labs/flux-2-pro (โทนน้ำเงิน-เทา)
 // แล้วแปะ cover + coverAlt ลง frontmatter ของไฟล์บทความให้อัตโนมัติ
 //
 // ใช้งาน:
@@ -124,8 +124,10 @@ async function main() {
   console.log(`  prompt: ${prompt}`);
 
   const replicate = new Replicate();
-  const output = await replicate.run('google/imagen-4', {
-    input: { prompt, aspect_ratio: aspect, safety_filter_level: 'block_only_high' },
+  const output = await replicate.run('black-forest-labs/flux-2-pro', {
+    // output_format: 'png' บังคับให้ไบต์ตรงกับไฟล์ ${slug}.png ที่เซฟ (flux default = webp)
+    // safety_tolerance: 5 = ผ่อนสุด (กัน false-block รูปสินค้า) — แทน safety_filter_level ของ imagen
+    input: { prompt, aspect_ratio: aspect, output_format: 'png', safety_tolerance: 5 },
   });
 
   const file = Array.isArray(output) ? output[0] : output;
