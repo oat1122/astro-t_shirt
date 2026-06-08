@@ -1,0 +1,69 @@
+---
+// RelatedServices — บล็อก CTA ลิงก์ "ขึ้น" ไป money pillar (/services) + /products
+// ใช้ท้ายบทความบล็อกและหน้าสินค้า เพื่อกระจาย authority แบบ pillar–cluster (internal linking)
+// anchor เป็นข้อความเชิงบรรยาย (เลี่ยง "คลิกที่นี่") — ชี้ไป section จริงใน /services
+import { SITE } from '@/consts';
+
+interface Props {
+  /** คลาสเสริมของ <section> — ปรับระยะห่างเฉพาะที่ใช้งานได้ */
+  class?: string;
+}
+const { class: className } = Astro.props;
+
+const links = [
+  {
+    href: '/services',
+    label: 'รับผลิตเสื้อครบวงจร',
+    desc: 'เสื้อยืด โปโล แจ็คเก็ต ตั้งแต่เลือกผ้าถึงตัดเย็บ',
+  },
+  {
+    href: '/services#screen',
+    label: 'งานสกรีน DTG/DTF และซิลค์สกรีน',
+    desc: 'เลือกเทคนิคงานพิมพ์ให้เหมาะกับลายและจำนวน',
+  },
+  {
+    href: '/products',
+    label: 'ดูผลงานรับผลิตเสื้อที่ผ่านมา',
+    desc: 'ตัวอย่างงานจริงหลากหลายสไตล์',
+  },
+] as const;
+---
+
+<section
+  class:list={[
+    'rounded-2xl border border-border bg-background p-6 sm:p-8',
+    className,
+  ]}
+  aria-labelledby="related-services-heading"
+>
+  <h2 id="related-services-heading" class="text-xl sm:text-2xl font-bold tracking-tight">
+    บริการที่เกี่ยวข้อง
+  </h2>
+  <p class="mt-2 text-sm sm:text-base text-muted-foreground">
+    สนใจผลิตเสื้อกับ {SITE.name}? เริ่มจากบริการที่ตรงกับงานของคุณได้เลย
+  </p>
+
+  <ul class="mt-5 grid gap-3 sm:grid-cols-2">
+    {links.map((l) => (
+      <li>
+        <a
+          href={l.href}
+          class="group block h-full rounded-xl border border-border p-4 transition-colors hover:border-primary hover:bg-primary/5"
+        >
+          <span class="block font-semibold text-foreground group-hover:text-primary transition-colors">
+            {l.label}
+          </span>
+          <span class="mt-1 block text-xs sm:text-sm text-muted-foreground">{l.desc}</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+
+  <a
+    href={SITE.contact.lineLink}
+    class="mt-5 inline-flex items-center gap-2 font-medium text-primary hover:underline"
+  >
+    ปรึกษาฟรีและขอใบเสนอราคาทาง LINE {SITE.contact.line}
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+  </a>
+</section>

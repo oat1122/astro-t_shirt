@@ -11,9 +11,6 @@ export const SITE = {
   defaultOgImage: '/og-default.png',
   // ข้อมูลองค์กรสำหรับ JSON-LD
   author: 'เสื้อแท้',
-  social: {
-    twitter: '@astrotshirt',
-  },
   contact: {
     phone: '090-201-9121',
     phoneLink: 'tel:0902019121',

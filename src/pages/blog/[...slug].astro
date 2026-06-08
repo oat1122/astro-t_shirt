@@ -6,11 +6,10 @@ import ArticleCover from '@/components/blog/ArticleCover.astro';
 import ArticleShare from '@/components/blog/ArticleShare.astro';
 import BlogSidebar from '@/components/blog/sidebar/BlogSidebar.astro';
 import BlogLinkPreview from '@/components/blog/BlogLinkPreview.astro';
+import RelatedServices from '@/components/RelatedServices.astro';
 import Faq from '@/components/Faq.astro';
 import { buildFaqJsonLd } from '@/lib/faq';
 import { getCollection, render } from 'astro:content';
-import { SITE } from '@/consts';
-import favicon from '@/assets/favicon.png';
 
 export async function getStaticPaths() {
   const posts = (await getCollection('blog')).filter((p) => !p.data.draft);
@@ -34,11 +33,8 @@ const articleJsonLd = {
   description: d.description,
   ...(ogImage && { image: ogImage }),
   author: { '@type': 'Person', name: d.author },
-  publisher: {
-    '@type': 'Organization',
-    name: SITE.name,
-    logo: { '@type': 'ImageObject', url: new URL(favicon.src, Astro.site).toString() },
-  },
+  // อ้าง Organization กลาง (render ทุกหน้าจาก SEO.astro) ด้วย @id แทนประกาศซ้ำ
+  publisher: { '@id': new URL('/#organization', Astro.site).toString() },
   datePublished: d.publishedAt.toISOString(),
   ...(d.updatedAt && { dateModified: d.updatedAt.toISOString() }),
   mainEntityOfPage: {
@@ -72,6 +68,9 @@ const faqJsonLd = buildFaqJsonLd(d.faq);
 
             {/* FAQ ที่มองเห็นได้ — เรนเดอร์จาก data เดียวกับ FAQPage JSON-LD */}
             <Faq items={d.faq} />
+
+            {/* internal link cluster→pillar: ลิงก์ขึ้นไปหน้าบริการ (money page) */}
+            <RelatedServices class="mt-12" />
 
             <div class="mt-12">
               <ArticleShare tags={d.tags} />

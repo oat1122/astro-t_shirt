@@ -15,6 +15,7 @@ import Faq from '@/components/Faq.astro';
 import { buildFaqJsonLd, type FaqItem } from '@/lib/faq';
 import { SERVICES } from '@/lib/services';
 import { SITE } from '@/consts';
+import logo from '@/assets/logo.png';
 
 // URL หน้านี้ (absolute) — ใช้ใน JSON-LD ของ Service และ Breadcrumb
 const pageUrl = new URL('/services', Astro.site).toString();
@@ -71,10 +72,15 @@ const serviceJsonLd = {
   provider: {
     '@type': 'LocalBusiness',
     name: SITE.name,
-    image: new URL('/favicon.png', Astro.site).toString(),
+    // ชื่อนิติบุคคล + ชื่อพ้อง ให้ตรงกับ Organization กลาง (entity เดียวกัน)
+    legalName: 'บริษัท ธน พลัส 153 จำกัด',
+    alternateName: ['ธน พลัส 153', 'Thana Plus 153'],
+    // โลโก้แบรนด์จริงผ่าน astro:assets (.src = path ที่ hash จริง) — เดิมชี้ /favicon.png ที่ 404
+    image: new URL(logo.src, Astro.site).toString(),
     url: Astro.site?.toString(),
     telephone: SITE.contact.phone,
     email: SITE.contact.email,
+    sameAs: [SITE.contact.lineLink],
     address: {
       '@type': 'PostalAddress',
       streetAddress: '503 ถนนสุโขทัย แขวงสวนจิตรลดา',

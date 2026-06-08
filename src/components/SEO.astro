@@ -3,6 +3,7 @@
 // ใช้ astro:assets-friendly + canonical URL จาก Astro.site
 import { SEO as AstroSEO } from 'astro-seo';
 import { SITE } from '@/consts';
+import logo from '@/assets/logo.png';
 
 interface Props {
   title?: string;
@@ -26,21 +27,31 @@ const {
   jsonLd,
 } = Astro.props;
 
-const pageTitle = title ? `${title}  ${SITE.name}` : SITE.title;
+// separator " | " แยกหัวข้อหน้ากับชื่อแบรนด์ให้ชัดใน SERP
+const pageTitle = title ? `${title} | ${SITE.name}` : SITE.title;
 
 // canonical = URL ปัจจุบันเทียบกับ Astro.site
 const canonical = new URL(Astro.url.pathname, Astro.site).toString();
 // แปลง image เป็น absolute URL
 const ogImage = new URL(image, Astro.site).toString();
+// OG/Twitter image: ใส่ alt เสมอ (กัน warning ของ astro-seo) + width/height เฉพาะรูป default ที่รู้ขนาดแน่นอน (1200×630)
+const isDefaultOg = image === SITE.defaultOgImage;
+const ogImageAlt = pageTitle;
 
 // JSON-LD เริ่มต้น: Organization + WebSite (ดีต่อ GEO/LLM crawler)
 const defaultJsonLd = [
   {
     '@context': 'https://schema.org',
     '@type': 'Organization',
+    // @id คงที่ → ให้หน้าอื่นอ้างถึง Organization เดียวกันได้ (กัน entity ซ้ำ)
+    '@id': new URL('/#organization', Astro.site).toString(),
     name: SITE.name,
+    // ชื่อนิติบุคคล + ชื่อพ้อง → ผูกชื่อแบรนด์ทุกแบบให้ Google เห็นเป็น entity เดียว
+    legalName: 'บริษัท ธน พลัส 153 จำกัด',
+    alternateName: ['ธน พลัส 153', 'Thana Plus 153'],
     url: Astro.site?.toString(),
-    logo: new URL('/favicon.svg', Astro.site).toString(),
+    // โลโก้แบรนด์จริง (สี่เหลี่ยมจัตุรัส) ผ่าน astro:assets → path ที่ hash จริง ไม่ 404
+    logo: new URL(logo.src, Astro.site).toString(),
     telephone: SITE.contact.phone,
     email: SITE.contact.email,
     address: {
@@ -51,17 +62,31 @@ const defaultJsonLd = [
       postalCode: '10300',
       addressCountry: 'TH',
     },
+    // สัญญาณ entity: โปรไฟล์โซเชียลจริง (LINE) + ช่องทางติดต่อ
+    sameAs: [SITE.contact.lineLink],
+    contactPoint: {
+      '@type': 'ContactPoint',
+      telephone: SITE.contact.phone,
+      contactType: 'sales',
+      areaServed: 'TH',
+      availableLanguage: ['th'],
+    },
   },
   {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: SITE.name,
     url: Astro.site?.toString(),
+    inLanguage: 'th-TH',
+    // ผูก WebSite กับ Organization เดียวกัน (อ้าง @id)
+    publisher: { '@id': new URL('/#organization', Astro.site).toString() },
   },
 ];
 
-const structuredData = jsonLd ?? defaultJsonLd;
-const ldArray = Array.isArray(structuredData) ? structuredData : [structuredData];
+// Organization+WebSite ต้องออก "ทุกหน้า" เสมอ แล้วต่อท้ายด้วย JSON-LD เฉพาะหน้า
+// (รวม ไม่ใช่แทนที่) — ไม่งั้นหน้าที่ส่ง jsonLd มา (หน้าแรก/money page) จะไม่มี entity schema
+const pageLd = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
+const ldArray = [...defaultJsonLd, ...pageLd];
 ---
 
 <AstroSEO
@@ -82,10 +107,13 @@ const ldArray = Array.isArray(structuredData) ? structuredData : [structuredData
       description,
       locale: SITE.locale,
     },
+    image: isDefaultOg
+      ? { alt: ogImageAlt, type: 'image/png', width: 1200, height: 630 }
+      : { alt: ogImageAlt },
   }}
   twitter={{
     card: 'summary_large_image',
-    site: SITE.social.twitter,
+    imageAlt: ogImageAlt,
     title: pageTitle,
     description,
     image: ogImage,

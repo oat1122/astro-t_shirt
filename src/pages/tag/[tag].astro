@@ -27,7 +27,7 @@ export async function getStaticPaths() {
 const { posts, tag } = Astro.props;
 ---
 
-<PageLayout title={`แท็ก: ${tag}`} description={`รวมบทความที่ติดแท็ก ${tag}`}>
+<PageLayout title={`${tag} — รวมบทความที่เกี่ยวข้อง`} description={`รวมบทความที่ติดแท็ก ${tag} ทั้งหมด ${posts.length} บทความ จาก เสื้อแท้ (ธน พลัส 153)`} noindex={true}>
         <div class="max-w-7xl mx-auto">
           <div class="mb-12">
             <a href="/blog" class="inline-flex items-center text-sm font-medium text-gray-500 hover:text-gray-900 mb-6 transition-colors">

@@ -3,6 +3,7 @@ import PageLayout from '@/layouts/PageLayout.astro';
 import { getCollection, render } from 'astro:content';
 
 import ProductGallery from '@/components/products/ProductGallery.astro';
+import RelatedServices from '@/components/RelatedServices.astro';
 import Faq from '@/components/Faq.astro';
 import { buildFaqJsonLd } from '@/lib/faq';
 import { SITE } from '@/consts';
@@ -36,6 +37,7 @@ const productJsonLd = {
     url: new URL(Astro.url.pathname, Astro.site).toString(),
     priceCurrency: 'THB',
     price: d.price,
+    priceValidUntil: '2026-12-31',
     availability: d.inStock
       ? 'https://schema.org/InStock'
       : 'https://schema.org/OutOfStock',
@@ -85,5 +87,8 @@ const faqJsonLd = buildFaqJsonLd(d.faq);
     <div class="max-w-3xl mx-auto">
       <Faq items={d.faq} />
     </div>
+
+    {/* internal link product→pillar: ลิงก์ไปหน้าบริการ (money page) */}
+    <RelatedServices class="max-w-3xl mx-auto mt-16" />
   </div>
 </PageLayout>

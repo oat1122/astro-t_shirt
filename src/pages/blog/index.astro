@@ -5,11 +5,32 @@ import BlogPopularTags from '@/components/blog/BlogPopularTags.astro';
 import BlogFeatured from '@/components/blog/BlogFeatured.astro';
 import BlogGrid from '@/components/blog/BlogGrid.astro';
 import BlogExplorerSection from '@/components/blog/BlogExplorerSection.astro';
+
+// JSON-LD: Blog + Breadcrumb (หน้าแรก → บทความ) — บอกโครงสร้าง hub ของบล็อก
+const blogUrl = new URL('/blog', Astro.site).toString();
+const orgId = new URL('/#organization', Astro.site).toString();
+const blogJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Blog',
+  name: 'บทความและความรู้เรื่องเสื้อผ้า งานสกรีน และการทำแบรนด์',
+  url: blogUrl,
+  inLanguage: 'th-TH',
+  publisher: { '@id': orgId },
+};
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'หน้าแรก', item: Astro.site?.toString() },
+    { '@type': 'ListItem', position: 2, name: 'บทความ', item: blogUrl },
+  ],
+};
 ---
 
 <PageLayout
-  title="บทความและความรู้เรื่องเสื้อผ้า รับงานสกรีนเสื้อ"
-  description="รวมบทความน่ารู้ เทรนด์แฟชั่น เทคนิคงานสกรีน และเคล็ดลับการทำแบรนด์เสื้อผ้า รับงานสกรีนเสื้อ จากโรงงานผลิตเสื้อผ้าครบวงจร ธน พลัส 153"
+  title="บทความและความรู้เรื่องเสื้อผ้า งานสกรีน และการทำแบรนด์"
+  description="รวมบทความน่ารู้ เทรนด์แฟชั่น เทคนิคงานสกรีน และเคล็ดลับการทำแบรนด์เสื้อผ้า จากโรงงานผลิตเสื้อผ้าครบวงจร เสื้อแท้ (ธน พลัส 153)"
+  jsonLd={[blogJsonLd, breadcrumbJsonLd]}
 >
   <BlogHero />
   <BlogPopularTags />
