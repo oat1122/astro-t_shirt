@@ -9,6 +9,8 @@ import { EnumChangefreq } from "sitemap";
 import robotsTxt from "astro-robots-txt";
 import tailwindcss from "@tailwindcss/vite";
 
+import cloudflare from "@astrojs/cloudflare";
+
 // โดเมนจริงของเว็บ — อ่านจาก .env (ดู .env.example), fallback เป็นค่า default
 // มีผลต่อ sitemap / robots / rss / canonical URL
 const { SITE_URL = "https://xn--o3c1bj3b4bj8cd.com/" } = loadEnv(
@@ -21,6 +23,7 @@ const { SITE_URL = "https://xn--o3c1bj3b4bj8cd.com/" } = loadEnv(
 export default defineConfig({
   // ใช้ static output (SSG) เป็นหลัก ตาม core stack
   output: "static",
+
   site: SITE_URL,
 
   integrations: [
@@ -101,4 +104,6 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
+
+  adapter: cloudflare(),
 });
