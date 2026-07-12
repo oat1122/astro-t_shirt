@@ -5,7 +5,9 @@ author: "ทีมงาน Thana Plus 153"
 publishedAt: 2026-07-06
 category: "ความรู้เรื่องผ้า"
 tags: ["เนื้อผ้า", "เสื้อยืด", "เสื้อโปโล", "รับผลิตเสื้อ"]
-draft: true
+cover: "@/assets/blogs/knit-fabric-single-jersey-pique-interlock.png"
+coverAlt: "สวอตช์ผ้าถักสามชนิด Single Jersey, Pique, Interlock วางเทียบเนื้อผ้า"
+draft: false
 faq:
   - question: "ผ้า Single Jersey กับ Interlock ต่างกันยังไง?"
     answer: "Single Jersey เป็นผ้าถักหน้าเดียว ผิวด้านหน้าเรียบ ด้านหลังเป็นแนวขน น้ำหนักเบา ยืดตัวดี แต่ขอบมักม้วนงอเวลาตัด ส่วน Interlock เป็นผ้าถักสองหน้าที่เกิดจากการถัก Single Jersey สองชั้นประกบกัน จึงหนากว่า อยู่ทรงกว่า ยืดน้อยกว่า และมีผิวเรียบเหมือนกันทั้งสองด้าน"

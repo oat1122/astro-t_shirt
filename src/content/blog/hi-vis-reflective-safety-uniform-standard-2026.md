@@ -5,6 +5,8 @@ author: "ทีมงาน Thana Plus 153"
 publishedAt: 2026-07-01
 category: "ความรู้เรื่องผ้า"
 tags: ["เนื้อผ้า", "ยูนิฟอร์ม", "รับผลิตเสื้อ", "การดูแลรักษา"]
+cover: "@/assets/blogs/hi-vis-reflective-safety-uniform-standard-2026.png"
+coverAlt: "เสื้อยูนิฟอร์ม Hi-Vis พร้อมแถบสะท้อนแสงตามมาตรฐานความปลอดภัย"
 draft: true
 faq:
   - question: "เสื้อ Hi-Vis กับเสื้อสะท้อนแสงทั่วไปต่างกันยังไง"

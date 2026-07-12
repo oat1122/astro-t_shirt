@@ -5,6 +5,8 @@ author: "ทีมงาน Thana Plus 153"
 publishedAt: 2026-07-10
 category: "ธุรกิจ"
 tags: ["รับผลิตเสื้อ", "เสื้อยืด", "สร้างแบรนด์", "มือใหม่"]
+cover: "@/assets/blogs/tshirt-size-chart-reduce-return-online-2026.png"
+coverAlt: "สายวัด เสื้อยืด และตารางไซส์ สื่อการวัดไซส์ให้แม่นลดการคืนสินค้า"
 draft: true
 faq:
   - question: "ตารางไซส์เสื้อยืดควรวัดแบบทาบราบหรือวัดรอบตัว?"

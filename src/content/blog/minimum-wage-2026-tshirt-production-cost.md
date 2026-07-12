@@ -5,6 +5,8 @@ author: "ทีมงาน Thana Plus 153"
 publishedAt: 2026-07-06
 category: "ธุรกิจ"
 tags: ["รับผลิตเสื้อ", "สร้างแบรนด์", "การตลาด", "เสื้อยืด"]
+cover: "@/assets/blogs/minimum-wage-2026-tshirt-production-cost.png"
+coverAlt: "จักรเย็บผ้าและเหรียญเงินในโรงงานเสื้อ สื่อต้นทุนค่าแรงขั้นต่ำ SME"
 draft: true
 faq:
   - question: "ค่าแรงขั้นต่ำ 2569 เท่าไร ขึ้นเป็น 400 บาททั้งประเทศแล้วหรือยัง?"

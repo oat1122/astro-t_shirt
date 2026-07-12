@@ -5,6 +5,8 @@ author: "ทีมงาน Thana Plus 153"
 publishedAt: 2026-06-25
 category: "เลือกสีและสไตล์"
 tags: ["เสื้อยืด", "สร้างแบรนด์", "เลือกสีเสื้อ", "การตลาด"]
+cover: "@/assets/blogs/baby-tee-fitted-cropped-tshirt-trend-2026.png"
+coverAlt: "เสื้อ Baby Tee ทรงฟิตแขวนบนไม้แขวน สไตล์เทรนด์แฟชั่นยุคใหม่"
 draft: true
 faq:
   - question: "เสื้อ Baby Tee คืออะไร ต่างจากเสื้อครอปทั่วไปยังไง?"

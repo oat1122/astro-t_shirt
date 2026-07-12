@@ -5,6 +5,8 @@ author: "ทีมงาน Thana Plus 153"
 publishedAt: 2026-07-10
 category: "ธุรกิจ"
 tags: ["การตลาด", "สร้างแบรนด์", "รับผลิตเสื้อ", "เสื้อยืด"]
+cover: "@/assets/blogs/blokecore-retro-football-shirt-trend-2026.png"
+coverAlt: "เสื้อฟุตบอลย้อนยุคแขวนบนราว สไตล์ Blokecore เรโทร"
 draft: true
 faq:
   - question: "Blokecore คืออะไร"

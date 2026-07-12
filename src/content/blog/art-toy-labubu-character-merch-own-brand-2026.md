@@ -5,7 +5,9 @@ author: "ทีมงาน Thana Plus 153"
 publishedAt: 2026-07-03
 category: "ธุรกิจ"
 tags: ["การตลาด", "สร้างแบรนด์", "รับผลิตเสื้อ", "เสื้อยืด"]
-draft: true
+cover: "@/assets/blogs/art-toy-labubu-character-merch-own-brand-2026.png"
+coverAlt: "อาร์ตทอยตัวการ์ตูนวางคู่เสื้อยืดลายคาแรกเตอร์ สื่อ character merch"
+draft: false
 faq:
   - question: "ทำเสื้อลาย Labubu หรือ Art Toy ดัง ๆ ขายได้ไหม?"
     answer: "ไม่ได้ ตัวการ์ตูนอย่าง Labubu, Molly, Hello Kitty เป็นลิขสิทธิ์ที่มีเจ้าของชัดเจน การเอาไปสกรีนบนเสื้อขายคือการละเมิดลิขสิทธิ์ มีโทษทั้งแพ่งและอาญา ทางที่ปลอดภัยและต่อยอดเป็นแบรนด์ได้จริงคือออกแบบมาสคอตหรือคาแรกเตอร์ของคุณเอง"

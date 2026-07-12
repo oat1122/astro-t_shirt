@@ -5,7 +5,9 @@ author: "ทีมงาน Thana Plus 153"
 publishedAt: 2026-07-08
 category: "ความรู้เรื่องผ้า"
 tags: ["เนื้อผ้า", "เสื้อยืด", "รับผลิตเสื้อ", "ยูนิฟอร์ม"]
-draft: true
+cover: "@/assets/blogs/linen-fabric-tshirt-summer-uniform-2026.png"
+coverAlt: "เสื้อผ้าลินินเนื้อโปร่งกับสวอตช์ผ้า สื่อความเย็นสบายรับหน้าร้อน"
+draft: false
 ---
 
 ## ผ้าลินินทำเสื้อยืดดีไหม เหมาะกับอากาศร้อนบ้านเราแค่ไหน

@@ -5,6 +5,8 @@ author: "ทีมงาน Thana Plus 153"
 publishedAt: 2026-07-12
 category: "ธุรกิจ"
 tags: ["รับผลิตเสื้อ", "การตลาด", "สร้างแบรนด์", "เสื้อยืด"]
+cover: "@/assets/blogs/minimum-wage-2026-tshirt-production-cost-impact.png"
+coverAlt: "เครื่องคิดเลข เหรียญ และเสื้อยืดในโรงงาน สื่อผลกระทบค่าแรงต่อต้นทุน"
 draft: true
 faq:
   - question: "ปี 2569 ค่าแรงขั้นต่ำปรับขึ้นอีกไหม?"

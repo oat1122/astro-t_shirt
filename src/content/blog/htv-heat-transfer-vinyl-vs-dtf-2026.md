@@ -5,7 +5,9 @@ author: "ทีมงาน Thana Plus 153"
 publishedAt: 2026-07-08
 category: "งานสกรีน"
 tags: ["DTF", "เสื้อยืด", "รับผลิตเสื้อ", "สร้างแบรนด์"]
-draft: true
+cover: "@/assets/blogs/htv-heat-transfer-vinyl-vs-dtf-2026.png"
+coverAlt: "เครื่องรีดร้อน แผ่นไวนิล HTV และฟิล์ม DTF สื่อการเปรียบเทียบงานพิมพ์"
+draft: false
 ---
 
 ## งานพิมพ์ HTV คืออะไร เหมาะกับงานแบบไหน

@@ -5,7 +5,9 @@ author: "ทีมงาน Thana Plus 153"
 publishedAt: 2026-07-01
 category: "เลือกสีและสไตล์"
 tags: ["เสื้อยืด", "สร้างแบรนด์", "การตลาด", "รับผลิตเสื้อ"]
-draft: true
+cover: "@/assets/blogs/blokecore-vintage-football-shirt-trend-2026.png"
+coverAlt: "เสื้อฟุตบอลย้อนยุคสไตล์ Blokecore พับวางคู่แฟชั่นสตรีทแวร์"
+draft: false
 faq:
   - question: "Blokecore คืออะไร"
     answer: "Blokecore คือสไตล์การแต่งตัวที่หยิบเสื้อบอล โดยเฉพาะเสื้อทีมย้อนยุคยุค 80–90 มาใส่เป็นชุดลำลองในชีวิตประจำวัน ไม่ใช่แค่ใส่เชียร์บอล มักแมตช์กับกางเกงยีนส์ทรงหลวมและรองเท้าผ้าใบคลาสสิกอย่าง Adidas Samba คำนี้มาจาก bloke ที่แปลว่าผู้ชายธรรมดาในสแลงอังกฤษ"

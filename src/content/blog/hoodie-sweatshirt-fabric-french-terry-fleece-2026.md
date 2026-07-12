@@ -5,7 +5,9 @@ author: "ทีมงาน Thana Plus 153"
 publishedAt: 2026-07-04
 category: "ความรู้เรื่องผ้า"
 tags: ["เนื้อผ้า", "คอตตอน", "รับผลิตเสื้อ", "สร้างแบรนด์"]
-draft: true
+cover: "@/assets/blogs/hoodie-sweatshirt-fabric-french-terry-fleece-2026.png"
+coverAlt: "เสื้อฮู้ดสองตัวโชว์เนื้อผ้า French Terry และ Fleece เทียบกัน"
+draft: false
 faq:
   - question: "French Terry กับ Fleece ต่างกันอย่างไร?"
     answer: "French Terry (ผ้าลูปแบ็ก) มีผิวนอกเรียบและด้านในเป็นห่วงเล็ก ๆ ไม่ผ่านการขูดขน ส่วน Fleece หรือผ้าสำลีขูดขนจะนำด้านห่วงไปขูดให้เป็นขนนุ่มฟู กักอากาศได้มากกว่าจึงอุ่นกว่า แต่ French Terry เบากว่า ระบายอากาศดีกว่า และเป็นขุยยากกว่า"
