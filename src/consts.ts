@@ -12,11 +12,11 @@ export const SITE = {
   // ข้อมูลองค์กรสำหรับ JSON-LD
   author: 'เสื้อแท้',
   contact: {
-    phone: '090-201-9121',
-    phoneLink: 'tel:0902019121',
-    line: '@thanaplus',
-    lineLink: 'https://line.me/R/ti/p/%40thanaplus',
-    email: 'thanaplusonline@gmail.com',
+    phone: '065-426-5062',
+    phoneLink: 'tel:0654265062',
+    line: 'nice.293',
+    lineLink: 'https://line.me/ti/p/~nice.293',
+    email: 'Bunyanit42@gmail.com',
     address: '503 ถนนสุโขทัย แขวงสวนจิตรลดา เขตดุสิต กรุงเทพมหานคร 10300',
   },
 } as const;
